@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/components.css">
 <link rel="stylesheet" href="assets/css/icons.css">
+<link rel="stylesheet" href="assets/css/components/carousel.css">
 <link rel="stylesheet" href="assets/css/sections/header.css">
 <link rel="stylesheet" href="assets/css/sections/hero.css">
 <link rel="stylesheet" href="assets/css/sections/stats.css">
@@ -127,34 +128,47 @@
        ======================================================================== -->
   <section class="stats" aria-label="Cifras y certificaciones">
     <div class="container">
-      <ul class="stats__grid">
-        <li class="stats__card" data-reveal>
-          <span class="icon icon--star-check stats__icon" aria-hidden="true"></span>
-          <p class="stats__value">17+ años</p>
-          <p class="stats__desc">de experiencia operando desde 2009</p>
-        </li>
-        <li class="stats__card" data-reveal style="--reveal-delay:80ms">
-          <span class="icon icon--flag stats__icon" aria-hidden="true"></span>
-          <p class="stats__value">100% capital</p>
-          <p class="stats__desc">nacional peruano</p>
-        </li>
-        <li class="stats__card" data-reveal style="--reveal-delay:160ms">
-          <span class="icon icon--seal-check stats__icon" aria-hidden="true"></span>
-          <p class="stats__value">ISO 9001:2015</p>
-          <p class="stats__desc">Procesos de calidad certificados</p>
-        </li>
-        <li class="stats__card" data-reveal style="--reveal-delay:240ms">
-          <span class="icon icon--gear-refresh stats__icon" aria-hidden="true"></span>
-          <p class="stats__value">Metodología COPC</p>
-          <p class="stats__desc">Gestión basada en resultados</p>
-        </li>
-      </ul>
+      <div class="stats__stack">
+  <div class="carousel stats__carousel" data-carousel aria-roledescription="carrusel" aria-label="Cifras y certificaciones">
+    <ul class="carousel__viewport stats__grid" tabindex="0" aria-label="Cifras y certificaciones">
+            <li class="stats__card" data-reveal>
+              <span class="icon icon--star-check stats__icon" aria-hidden="true"></span>
+              <p class="stats__value"><span class="counter" data-count-to="17">17</span>+ años</p>
+              <p class="stats__desc">de experiencia operando desde 2009</p>
+            </li>
+            <li class="stats__card" data-reveal style="--reveal-delay:80ms">
+              <span class="icon icon--flag stats__icon" aria-hidden="true"></span>
+              <p class="stats__value"><span class="counter" data-count-to="100">100</span>% capital</p>
+              <p class="stats__desc">nacional peruano</p>
+            </li>
+            <li class="stats__card" data-reveal style="--reveal-delay:160ms">
+              <span class="icon icon--seal-check stats__icon" aria-hidden="true"></span>
+              <p class="stats__value">ISO 9001:2015</p>
+              <p class="stats__desc">Procesos de calidad certificados</p>
+            </li>
+            <li class="stats__card" data-reveal style="--reveal-delay:240ms">
+              <span class="icon icon--gear-refresh stats__icon" aria-hidden="true"></span>
+              <p class="stats__value">Metodología COPC</p>
+              <p class="stats__desc">Gestión basada en resultados</p>
+            </li>
+          </ul>
+        <div class="carousel__controls">
+          <button class="carousel__btn carousel__btn--prev" type="button" data-carousel-prev aria-label="Anterior">
+            <svg class="icon-svg" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+          </button>
+          <div class="carousel__dots" data-carousel-dots role="tablist" aria-label="Seleccionar elemento"></div>
+          <button class="carousel__btn carousel__btn--next" type="button" data-carousel-next aria-label="Siguiente">
+            <svg class="icon-svg" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+          </button>
+        </div>
+        </div>
 
-      <figure class="stats__photo" data-reveal>
-        <img src="assets/img/photos/office.jpg"
-             alt="Equipo de Master Center Américas trabajando en la plataforma de contact center"
-             width="2000" height="1335" loading="lazy" decoding="async">
-      </figure>
+        <figure class="stats__photo" data-reveal>
+          <img src="assets/img/photos/office.jpg"
+               alt="Equipo de Master Center Américas trabajando en la plataforma de contact center"
+               width="2000" height="1335" loading="lazy" decoding="async">
+        </figure>
+      </div>
     </div>
   </section>
 
@@ -194,58 +208,69 @@
         <h2>Soluciones de gestión y servicio.</h2>
       </header>
 
-      <ul class="services__grid">
-        <li class="service" data-reveal>
-          <span class="icon-badge service__badge" aria-hidden="true">
-            <span class="icon icon--headset" aria-hidden="true"></span>
-          </span>
-          <h3 class="service__title">Telemarketing</h3>
-          <p class="service__text">Campañas de captación y venta con protocolos y speech auditados bajo COPC.</p>
-        </li>
+      <div class="carousel services__carousel" data-carousel aria-roledescription="carrusel" aria-label="Soluciones de gestión y servicio">
+  <ul class="carousel__viewport services__grid" tabindex="0" aria-label="Soluciones de gestión y servicio">
+          <li class="service" data-reveal>
+            <span class="icon-badge service__badge" aria-hidden="true">
+              <span class="icon icon--headset" aria-hidden="true"></span>
+            </span>
+            <h3 class="service__title">Telemarketing</h3>
+            <p class="service__text">Campañas de captación y venta con protocolos y speech auditados bajo COPC.</p>
+          </li>
 
-        <li class="service" data-reveal style="--reveal-delay:80ms">
-          <span class="icon-badge service__badge" aria-hidden="true">
-            <span class="icon icon--headset" aria-hidden="true"></span>
-          </span>
-          <h3 class="service__title">Atención al cliente</h3>
-          <p class="service__text">Servicio permanente centrado en la experiencia y satisfacción plena del cliente.</p>
-        </li>
+          <li class="service" data-reveal style="--reveal-delay:80ms">
+            <span class="icon-badge service__badge" aria-hidden="true">
+              <span class="icon icon--headset" aria-hidden="true"></span>
+            </span>
+            <h3 class="service__title">Atención al cliente</h3>
+            <p class="service__text">Servicio permanente centrado en la experiencia y satisfacción plena del cliente.</p>
+          </li>
 
-        <li class="service" data-reveal style="--reveal-delay:160ms">
-          <span class="icon-badge service__badge" aria-hidden="true">
-            <span class="icon icon--headset" aria-hidden="true"></span>
-          </span>
-          <h3 class="service__title">Gestión de campo</h3>
-          <p class="service__text">Cobertura en terreno con seguimiento y reportería estratégica en tiempo real.</p>
-        </li>
+          <li class="service" data-reveal style="--reveal-delay:160ms">
+            <span class="icon-badge service__badge" aria-hidden="true">
+              <span class="icon icon--headset" aria-hidden="true"></span>
+            </span>
+            <h3 class="service__title">Gestión de campo</h3>
+            <p class="service__text">Cobertura en terreno con seguimiento y reportería estratégica en tiempo real.</p>
+          </li>
 
-        <li class="service" data-reveal>
-          <span class="icon-badge service__badge" aria-hidden="true">
-            <span class="icon icon--headset" aria-hidden="true"></span>
-          </span>
-          <h3 class="service__title">Cobranzas</h3>
-          <p class="service__text">Gestión de recuperación con enfoque en resultados y cumplimiento normativo.</p>
-        </li>
+          <li class="service" data-reveal>
+            <span class="icon-badge service__badge" aria-hidden="true">
+              <span class="icon icon--headset" aria-hidden="true"></span>
+            </span>
+            <h3 class="service__title">Cobranzas</h3>
+            <p class="service__text">Gestión de recuperación con enfoque en resultados y cumplimiento normativo.</p>
+          </li>
 
-        <li class="service" data-reveal style="--reveal-delay:80ms">
-          <span class="icon-badge service__badge" aria-hidden="true">
-            <span class="icon icon--headset" aria-hidden="true"></span>
-          </span>
-          <h3 class="service__title">Back Office y reclamos</h3>
-          <p class="service__text">Procesamiento administrativo y gestión de reclamos con trazabilidad completa.</p>
-        </li>
+          <li class="service" data-reveal style="--reveal-delay:80ms">
+            <span class="icon-badge service__badge" aria-hidden="true">
+              <span class="icon icon--headset" aria-hidden="true"></span>
+            </span>
+            <h3 class="service__title">Back Office y reclamos</h3>
+            <p class="service__text">Procesamiento administrativo y gestión de reclamos con trazabilidad completa.</p>
+          </li>
 
-        <li class="service" data-reveal style="--reveal-delay:160ms">
-          <span class="icon-badge service__badge" aria-hidden="true">
-            <span class="icon icon--nodes" aria-hidden="true"></span>
-          </span>
-          <h3 class="service__title">Canales digitales</h3>
-          <p class="service__text">
-            Plataforma omnicanal para administrar tus RR.SS, WhatsApp, mailing en una sola
-            plataforma. Además de nuestros agentes virtuales de voz y canal escrito.
-          </p>
-        </li>
-      </ul>
+          <li class="service" data-reveal style="--reveal-delay:160ms">
+            <span class="icon-badge service__badge" aria-hidden="true">
+              <span class="icon icon--nodes" aria-hidden="true"></span>
+            </span>
+            <h3 class="service__title">Canales digitales</h3>
+            <p class="service__text">
+              Plataforma omnicanal para administrar tus RR.SS, WhatsApp, mailing en una sola
+              plataforma. Además de nuestros agentes virtuales de voz y canal escrito.
+            </p>
+          </li>
+        </ul>
+      <div class="carousel__controls">
+        <button class="carousel__btn carousel__btn--prev" type="button" data-carousel-prev aria-label="Anterior">
+          <svg class="icon-svg" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+        </button>
+        <div class="carousel__dots" data-carousel-dots role="tablist" aria-label="Seleccionar elemento"></div>
+        <button class="carousel__btn carousel__btn--next" type="button" data-carousel-next aria-label="Siguiente">
+          <svg class="icon-svg" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+        </button>
+      </div>
+      </div>
     </div>
   </section>
 
@@ -257,121 +282,144 @@
     <div class="container clients__inner">
       <h2 class="clients__title" data-reveal>Confían en nosotros bancos, financieras y organismos del estado</h2>
 
-      <div class="clients__panels">
-        <article class="client-panel" data-reveal>
-          <span class="pill pill--blue client-panel__label">Sector financiero</span>
-          <div class="client-panel__logos">
-            <img data-logo="bbva" src="assets/img/logos/bbva.png" alt="BBVA" loading="lazy" decoding="async">
-            <img data-logo="financiera-oh" src="assets/img/logos/financiera-oh.png" alt="Financiera Oh!" loading="lazy" decoding="async">
-            <img data-logo="diners-club" src="assets/img/logos/diners-club.png" alt="Diners Club International" loading="lazy" decoding="async">
-            <img data-logo="scotiabank" src="assets/img/logos/scotiabank.png" alt="Scotiabank" loading="lazy" decoding="async">
-          </div>
-        </article>
-
-        <article class="client-panel" data-reveal style="--reveal-delay:100ms">
-          <span class="pill pill--navy client-panel__label">Sector estatal</span>
-          <div class="client-panel__logos">
-            <img data-logo="fondo-mivivienda" src="assets/img/logos/fondo-mivivienda.png" alt="Fondo Mivivienda" loading="lazy" decoding="async">
-            <img data-logo="mac" src="assets/img/logos/mac.png" alt="MAC — Mejor Atención al Ciudadano" loading="lazy" decoding="async">
-            <img data-logo="gilat" src="assets/img/logos/gilat.png" alt="Gilat Satellite Networks" loading="lazy" decoding="async">
-          </div>
-        </article>
-
-        <article class="client-panel" data-reveal style="--reveal-delay:200ms">
-          <span class="pill pill--sky client-panel__label">Otros sectores</span>
-          <div class="client-panel__logos">
-            <div class="client-panel__row">
-              <img data-logo="3m" src="assets/img/logos/3m.png" alt="3M" loading="lazy" decoding="async">
-              <img data-logo="pecsa-gas" src="assets/img/logos/pecsa-gas.png" alt="Pecsa Gas" loading="lazy" decoding="async">
+      <div class="carousel clients__carousel" data-carousel aria-roledescription="carrusel" aria-label="Clientes por sector">
+  <div class="carousel__viewport clients__panels" tabindex="0" aria-label="Clientes por sector">
+          <article class="client-panel" data-reveal>
+            <span class="pill pill--blue client-panel__label">Sector financiero</span>
+            <div class="client-panel__logos">
+              <img data-logo="bbva" src="assets/img/logos/bbva.png" alt="BBVA" loading="lazy" decoding="async">
+              <img data-logo="financiera-oh" src="assets/img/logos/financiera-oh.png" alt="Financiera Oh!" loading="lazy" decoding="async">
+              <img data-logo="diners-club" src="assets/img/logos/diners-club.png" alt="Diners Club International" loading="lazy" decoding="async">
+              <img data-logo="scotiabank" src="assets/img/logos/scotiabank.png" alt="Scotiabank" loading="lazy" decoding="async">
             </div>
-            <img data-logo="quimica-suiza" src="assets/img/logos/quimica-suiza.png" alt="Química Suiza" loading="lazy" decoding="async">
-            <img data-logo="kimberly-clark" src="assets/img/logos/kimberly-clark.png" alt="Kimberly-Clark" loading="lazy" decoding="async">
-          </div>
-        </article>
+          </article>
+
+          <article class="client-panel" data-reveal style="--reveal-delay:100ms">
+            <span class="pill pill--navy client-panel__label">Sector estatal</span>
+            <div class="client-panel__logos">
+              <img data-logo="fondo-mivivienda" src="assets/img/logos/fondo-mivivienda.png" alt="Fondo Mivivienda" loading="lazy" decoding="async">
+              <img data-logo="mac" src="assets/img/logos/mac.png" alt="MAC — Mejor Atención al Ciudadano" loading="lazy" decoding="async">
+              <img data-logo="gilat" src="assets/img/logos/gilat.png" alt="Gilat Satellite Networks" loading="lazy" decoding="async">
+            </div>
+          </article>
+
+          <article class="client-panel" data-reveal style="--reveal-delay:200ms">
+            <span class="pill pill--sky client-panel__label">Otros sectores</span>
+            <div class="client-panel__logos">
+              <div class="client-panel__row">
+                <img data-logo="3m" src="assets/img/logos/3m.png" alt="3M" loading="lazy" decoding="async">
+                <img data-logo="pecsa-gas" src="assets/img/logos/pecsa-gas.png" alt="Pecsa Gas" loading="lazy" decoding="async">
+              </div>
+              <img data-logo="quimica-suiza" src="assets/img/logos/quimica-suiza.png" alt="Química Suiza" loading="lazy" decoding="async">
+              <img data-logo="kimberly-clark" src="assets/img/logos/kimberly-clark.png" alt="Kimberly-Clark" loading="lazy" decoding="async">
+            </div>
+          </article>
+        </div>
+
+        <div class="carousel__controls">
+          <button class="carousel__btn carousel__btn--prev" type="button" data-carousel-prev aria-label="Anterior">
+            <svg class="icon-svg" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+          </button>
+          <div class="carousel__dots" data-carousel-dots role="tablist" aria-label="Seleccionar elemento"></div>
+          <button class="carousel__btn carousel__btn--next" type="button" data-carousel-next aria-label="Siguiente">
+            <svg class="icon-svg" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+          </button>
+        </div>
       </div>
     </div>
   </section>
 
 
-  <!-- ========================================================================
-       07 — ¿Por qué trabajar con nosotros?
-       ======================================================================== -->
-  <section class="why" id="por-que">
-    <div class="container why__inner">
-      <div class="why__panel" data-reveal>
-        <h2 class="why__title">¿Por qué trabajar con nosotros?</h2>
+    <!-- ========================================================================
+         07 — ¿Por qué trabajar con nosotros?
+         ======================================================================== -->
+    <section class="why" id="por-que">
+      <div class="container why__inner">
+        <div class="why__panel" data-reveal>
+          <h2 class="why__title">¿Por qué trabajar con nosotros?</h2>
 
-        <ul class="why__list">
-          <li class="why__item">
-            <h3 class="why__item-title">Especialización financiera</h3>
-            <p class="why__item-text">17 años enfocados en banca y financieras.</p>
-          </li>
-          <li class="why__item">
-            <h3 class="why__item-title">Altos estándares de calidad</h3>
-            <p class="why__item-text">Certificados en ISO 9001, metodología COPC y en camino hacia la certificación ISO 27000.</p>
-          </li>
-          <li class="why__item">
-            <h3 class="why__item-title">Gestión antifraude</h3>
-            <p class="why__item-text">Gestión de mesas de control, que garantizan 100% de la calidad de las ventas y sus procesos, que tienen como resultado ventas certificadas y libres de malas praxis.</p>
-          </li>
-        </ul>
+          <ul class="why__list">
+            <li class="why__item">
+              <h3 class="why__item-title">Especialización financiera</h3>
+              <p class="why__item-text">17 años enfocados en banca y financieras.</p>
+            </li>
+            <li class="why__item">
+              <h3 class="why__item-title">Altos estándares de calidad</h3>
+              <p class="why__item-text">Certificados en ISO 9001, metodología COPC y en camino hacia la certificación ISO 27000.</p>
+            </li>
+            <li class="why__item">
+              <h3 class="why__item-title">Gestión antifraude</h3>
+              <p class="why__item-text">Gestión de mesas de control, que garantizan 100% de la calidad de las ventas y sus procesos, que tienen como resultado ventas certificadas y libres de malas praxis.</p>
+            </li>
+          </ul>
+        </div>
+
+        <figure class="why__photo" data-reveal style="--reveal-delay:120ms">
+          <img src="assets/img/photos/call-center.jpg"
+               alt="Agentes de contact center atendiendo llamadas con diadema"
+               width="320" height="400" loading="lazy" decoding="async">
+        </figure>
       </div>
-
-      <figure class="why__photo" data-reveal style="--reveal-delay:120ms">
-        <img src="assets/img/photos/call-center.jpg"
-             alt="Agentes de contact center atendiendo llamadas con diadema"
-             width="320" height="400" loading="lazy" decoding="async">
-      </figure>
-    </div>
-  </section>
+    </section>
 
 
-  <!-- ========================================================================
-       08 — Metodología
-       ======================================================================== -->
-  <section class="section method" id="metodologia">
-    <div class="container">
-      <header class="section-head" data-reveal>
-        <h2>Ciclo virtuoso, no un simple ofrecimiento</h2>
-      </header>
+    <!-- ========================================================================
+         08 — Metodología
+         ======================================================================== -->
+    <section class="section method" id="metodologia">
+      <div class="container">
+        <header class="section-head" data-reveal>
+          <h2>Ciclo virtuoso, no un simple ofrecimiento</h2>
+        </header>
 
-      <ol class="method__steps">
-        <li class="method__step" data-reveal>
-          <span class="icon-badge icon-badge--gradient" aria-hidden="true">
-            <span class="icon icon--search" aria-hidden="true"></span>
-          </span>
-          <p class="method__step-no">Paso 1</p>
-          <p class="method__step-label">Diagnóstico</p>
-        </li>
-        <li class="method__step" data-reveal style="--reveal-delay:80ms">
-          <span class="icon-badge icon-badge--gradient" aria-hidden="true">
-            <span class="icon icon--puzzle" aria-hidden="true"></span>
-          </span>
-          <p class="method__step-no">Paso 2</p>
-          <p class="method__step-label">Estrategia</p>
-        </li>
-        <li class="method__step" data-reveal style="--reveal-delay:160ms">
-          <span class="icon-badge icon-badge--gradient" aria-hidden="true">
-            <span class="icon icon--chart-cycle" aria-hidden="true"></span>
-          </span>
-          <p class="method__step-no">Paso 3</p>
-          <p class="method__step-label">Implementación</p>
-        </li>
-        <li class="method__step" data-reveal style="--reveal-delay:240ms">
-          <span class="icon-badge icon-badge--gradient" aria-hidden="true">
-            <span class="icon icon--chart-up" aria-hidden="true"></span>
-          </span>
-          <p class="method__step-no">Paso 4</p>
-          <p class="method__step-label">Medición</p>
-        </li>
-        <li class="method__step" data-reveal style="--reveal-delay:320ms">
-          <span class="icon-badge icon-badge--gradient" aria-hidden="true">
-            <span class="icon icon--gear-cycle" aria-hidden="true"></span>
-          </span>
-          <p class="method__step-no">Paso 5</p>
-          <p class="method__step-label">Optimización</p>
-        </li>
-      </ol>
+        <div class="carousel method__carousel" data-carousel aria-roledescription="carrusel" aria-label="Pasos de la metodología">
+    <ol class="carousel__viewport method__steps" tabindex="0" aria-label="Pasos de la metodología">
+            <li class="method__step" data-reveal>
+              <span class="icon-badge icon-badge--gradient" aria-hidden="true">
+                <span class="icon icon--search" aria-hidden="true"></span>
+              </span>
+              <p class="method__step-no">Paso 1</p>
+              <p class="method__step-label">Diagnóstico</p>
+            </li>
+            <li class="method__step" data-reveal style="--reveal-delay:80ms">
+              <span class="icon-badge icon-badge--gradient" aria-hidden="true">
+                <span class="icon icon--puzzle" aria-hidden="true"></span>
+              </span>
+              <p class="method__step-no">Paso 2</p>
+              <p class="method__step-label">Estrategia</p>
+            </li>
+            <li class="method__step" data-reveal style="--reveal-delay:160ms">
+              <span class="icon-badge icon-badge--gradient" aria-hidden="true">
+                <span class="icon icon--chart-cycle" aria-hidden="true"></span>
+              </span>
+              <p class="method__step-no">Paso 3</p>
+              <p class="method__step-label">Implementación</p>
+            </li>
+            <li class="method__step" data-reveal style="--reveal-delay:240ms">
+              <span class="icon-badge icon-badge--gradient" aria-hidden="true">
+                <span class="icon icon--chart-up" aria-hidden="true"></span>
+              </span>
+              <p class="method__step-no">Paso 4</p>
+              <p class="method__step-label">Medición</p>
+            </li>
+            <li class="method__step" data-reveal style="--reveal-delay:320ms">
+              <span class="icon-badge icon-badge--gradient" aria-hidden="true">
+                <span class="icon icon--gear-cycle" aria-hidden="true"></span>
+              </span>
+              <p class="method__step-no">Paso 5</p>
+              <p class="method__step-label">Optimización</p>
+            </li>
+          </ol>
+        <div class="carousel__controls">
+          <button class="carousel__btn carousel__btn--prev" type="button" data-carousel-prev aria-label="Anterior">
+            <svg class="icon-svg" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+          </button>
+          <div class="carousel__dots" data-carousel-dots role="tablist" aria-label="Seleccionar elemento"></div>
+          <button class="carousel__btn carousel__btn--next" type="button" data-carousel-next aria-label="Siguiente">
+            <svg class="icon-svg" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+          </button>
+        </div>
+      </div>
     </div>
   </section>
 

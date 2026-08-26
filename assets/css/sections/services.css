@@ -97,3 +97,17 @@
     font-size: 1.65rem;
   }
 }
+
+/* --- Carousel (mobile only) ----------------------------------------------- */
+/* --slide-inset repays the 28px each card is pushed right for its badge;
+   without it the slides overflow their share of the track. */
+
+@media (max-width: 767px) {
+  .services__carousel {
+    --slides: 1.08;
+    --carousel-gap: var(--sp-5);
+    --carousel-bleed-y: var(--sp-6);
+    --carousel-bleed-x: var(--sp-3);
+    --slide-inset: 28px;
+  }
+}

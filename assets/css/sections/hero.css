@@ -9,7 +9,7 @@
   position: relative;
   isolation: isolate;
   padding-top: calc(var(--header-h) + clamp(3rem, 6vw, 6.5rem));
-  padding-bottom: clamp(9rem, 14vw, 15rem);
+  padding-bottom: clamp(10rem, 17vw, 18rem);
   background-color: var(--c-navy);
   color: var(--c-on-dark);
   overflow: hidden;

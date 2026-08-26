@@ -8,8 +8,11 @@
 .stats {
   position: relative;
   z-index: 3;
-  /* Pull the whole block up into the navy hero. */
-  margin-top: calc(-1 * clamp(7rem, 11vw, 11.5rem));
+  /* Pull the whole block up into the navy hero. The pull has to exceed the
+     photo's offset inside the stack PLUS the hero wave's height, otherwise the
+     wave turns white above the photo's top edge and that white shows through
+     the gaps between cards — the seam this section had before. */
+  margin-top: calc(-1 * clamp(9rem, 16vw, 17rem));
 }
 
 .stats__grid {
@@ -20,8 +23,7 @@
   margin: 0px 40px;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: clamp(var(--sp-4), 1.5vw, var(--sp-5));
-  /* Negative margin lets the photo rise behind the cards. */
-  margin-bottom: calc(-1 * clamp(5rem, 11vw, 13rem));
+  /* Overlap is handled by .stats__stack now, not by a negative margin. */
 }
 
 /* Spacing is set with margins rather than a flex `gap` so the icon, the value
@@ -77,6 +79,35 @@
   line-height: 1.45;
 }
 
+/* --- Stack ---------------------------------------------------------------- */
+/* Cards and photo share one grid cell. Pinning both to the same row start is
+   what guarantees the photo's top edge never sits below the cards' — a gap
+   there lets the hero's navy show through between the cards as strips the
+   photo cuts off flat, which reads as a stray line. The negative margin this
+   replaces depended on the card height, so it broke at some widths. */
+
+.stats__stack {
+  display: grid;
+}
+
+.stats__stack > * {
+  grid-area: 1 / 1;
+  align-self: start;
+}
+
+/* The design has the cards straddling the boundary: their top third over the
+   navy hero, the rest over the photo. Offsetting the photo inside the stack
+   reproduces that, and because the offset is measured from the shared row
+   start it does not depend on how tall the cards happen to be. */
+.stats__stack > .stats__photo {
+  margin-top: clamp(48px, 6vw, 110px);
+}
+
+.stats__stack > .carousel {
+  position: relative;
+  z-index: var(--z-content);
+}
+
 /* --- Photo ---------------------------------------------------------------- */
 
 .stats__photo {
@@ -97,7 +128,6 @@
 @media (max-width: 1023px) {
   .stats__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    margin-bottom: calc(-1 * clamp(3rem, 8vw, 6rem));
   }
 
   .stats__photo img {
@@ -105,21 +135,59 @@
   }
 }
 
+/* Below 768px the carousel block further down owns the vertical rhythm — it is
+   the last matching rule, so the margins it sets win. Nothing to restate here. */
 @media (max-width: 599px) {
-  .stats {
-    margin-top: calc(-1 * clamp(4rem, 14vw, 7rem));
-  }
-
   .stats__grid {
     grid-template-columns: minmax(0, 1fr);
-    margin-bottom: calc(-1 * var(--sp-8));
-  }
-
-  .stats__card {
-    gap: var(--sp-4);
   }
 
   .stats__photo img {
     aspect-ratio: 4 / 3;
   }
+}
+
+/* --- Carousel (mobile only) ----------------------------------------------- */
+/* A fractional slide count leaves the next card peeking, which is the cue that
+   the row scrolls. The bleed clears the cards' large float shadow. */
+
+@media (max-width: 767px) {
+  .stats__carousel {
+    --slides: 1.12;
+    --carousel-gap: var(--sp-4);
+    /* No drop shadow on mobile, so the vertical bleed only has to clear the
+       cards' own rounding. */
+    --carousel-bleed-y: var(--sp-2);
+    --carousel-bleed-x: var(--sp-3);
+  }
+
+  .stats__card {
+    box-shadow: none;
+  }
+
+  /* On mobile the cards carry carousel controls underneath, so the desktop
+     overlap has to relax at both ends: less bite into the hero above, and
+     real clearance before the photo below. */
+  .stats {
+    margin-top: calc(-1 * clamp(1.5rem, 5vw, 3rem));
+  }
+
+  .stats__grid {
+    margin-bottom: 0;
+  }
+
+  /* No stacking on mobile: the carousel controls live between the cards and
+     the photo, so the two have to sit in normal flow instead of sharing a cell. */
+  .stats__stack {
+    display: block;
+  }
+
+  .stats__photo {
+    margin-top: var(--sp-9);
+  }
+}
+
+/* Digits change width as they count up; tabular figures stop the line jumping. */
+.counter {
+  font-variant-numeric: tabular-nums;
 }

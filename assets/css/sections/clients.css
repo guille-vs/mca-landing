@@ -114,3 +114,20 @@
     gap: var(--sp-9);
   }
 }
+
+/* --- Carousel (mobile only) ----------------------------------------------- */
+/* The pill label is pulled above the panel's top edge, so the vertical bleed
+   has to clear it or the scroll container clips it off. */
+
+@media (max-width: 767px) {
+  .clients__carousel {
+    --slides: 1.06;
+    --carousel-gap: var(--sp-5);
+    --carousel-bleed-y: var(--sp-7);
+    --carousel-bleed-x: var(--sp-3);
+  }
+
+  .clients__panels {
+    gap: 0;
+  }
+}

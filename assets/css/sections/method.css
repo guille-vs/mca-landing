@@ -67,3 +67,37 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* --- Carousel (mobile only) ----------------------------------------------- */
+/* The desktop connector is one rule across the whole row, positioned by
+   percentage. That cannot survive a scrolling track, so on mobile each step
+   draws its own segment reaching to the next one and it travels with the item. */
+
+@media (max-width: 767px) {
+  /* Wider steps and a bigger gap: at 2.2 slides the last three shared one
+     screen, so only three of the five were ever reachable with the arrows. */
+  .method__carousel {
+    --slides: 1.6;
+    --carousel-gap: var(--sp-7);
+    --carousel-bleed-y: var(--sp-3);
+    --carousel-bleed-x: var(--sp-3);
+  }
+
+  .method__steps::before {
+    display: none;
+  }
+
+  .method__step::after {
+    content: "";
+    position: absolute;
+    top: 40px;
+    /* From the edge of this badge's white ring to the edge of the next one. */
+    left: calc(50% + 50px);
+    width: calc(100% + var(--carousel-gap) - 100px);
+    border-top: 2px dashed var(--c-line);
+  }
+
+  .method__step:last-child::after {
+    display: none;
+  }
+}
