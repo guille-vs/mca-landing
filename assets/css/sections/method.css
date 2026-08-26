@@ -1,0 +1,69 @@
+/* ==========================================================================
+   Section 08 — Ciclo virtuoso (metodología)
+   Five equal steps joined by a dashed rule that runs between the icon centres.
+   ========================================================================== */
+
+.method__steps {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--sp-4);
+}
+
+/* Connector: with 5 equal columns each icon centre sits at 10%, 30% … 90%. */
+.method__steps::before {
+  content: "";
+  position: absolute;
+  top: 40px;
+  left: 10%;
+  width: 80%;
+  border-top: 2px dashed var(--c-line);
+}
+
+.method__step {
+  position: relative;
+  z-index: var(--z-content);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.method__step .icon-badge {
+  width: 80px;
+  height: 80px;
+  margin-bottom: var(--sp-5);
+  /* Masks the dashed rule so it appears to start at the circle's edge. */
+  box-shadow: 0 0 0 10px var(--c-white);
+  font-size: 2.9rem;
+}
+
+.method__step-no {
+  color: var(--c-blue);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-medium);
+}
+
+.method__step-label {
+  color: var(--c-ink);
+  font-size: var(--fs-lead);
+}
+
+/* --- Breakpoints ---------------------------------------------------------- */
+
+@media (max-width: 899px) {
+  .method__steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--sp-8) var(--sp-5);
+  }
+
+  .method__steps::before {
+    display: none;
+  }
+}
+
+@media (max-width: 479px) {
+  .method__steps {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

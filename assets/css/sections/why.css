@@ -1,0 +1,123 @@
+/* ==========================================================================
+   Section 07 — ¿Por qué trabajar con nosotros?
+   Gradient panel that bleeds off the left edge of the viewport, three columns
+   split by hairline rules, and a photo pinned to the right.
+   ========================================================================== */
+
+.why {
+  padding-block: var(--section-y);
+}
+
+.why__inner {
+  display: grid;
+  /* ~3:1 in the PDF once the panel's off-screen bleed is discounted. */
+  grid-template-columns: minmax(0, 2.8fr) minmax(0, 1fr);
+  align-items: stretch;
+  gap: clamp(var(--sp-5), 2vw, var(--sp-6));
+}
+
+/* --- Gradient panel ------------------------------------------------------- */
+
+.why__panel {
+  position: relative;
+  padding: clamp(var(--sp-7), 4.5vw, var(--sp-10));
+  /* Left corners stay square: that edge runs off the viewport, and rounding
+     it would expose the page background between panel and bleed. */
+  border-radius: 0 var(--r-xl) var(--r-xl) 0;
+  background: var(--grad-why);
+  color: var(--c-on-dark);
+}
+
+/* Bleed the panel to the left viewport edge, matching the PDF. */
+.why__panel::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 100%;
+  width: 100vw;
+  height: 100%;
+  background-color: var(--c-navy);
+}
+
+.why__title {
+  margin-bottom: clamp(var(--sp-6), 3vw, var(--sp-8));
+  color: var(--c-on-dark);
+}
+
+.why__list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(var(--sp-5), 2.5vw, var(--sp-7));
+}
+
+.why__item {
+  padding-left: clamp(var(--sp-5), 2.5vw, var(--sp-7));
+  border-left: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.why__item:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.why__item-title {
+  margin-bottom: var(--sp-2);
+  color: var(--c-sky);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-medium);
+}
+
+.why__item-text {
+  color: var(--c-on-dark-muted);
+  line-height: 1.55;
+}
+
+/* --- Photo ---------------------------------------------------------------- */
+
+.why__photo {
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+
+.why__photo img {
+  width: 100%;
+  height: 100%;
+  min-height: 260px;
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+/* --- Breakpoints ---------------------------------------------------------- */
+
+@media (max-width: 1023px) {
+  .why__inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .why__photo {
+    order: -1;
+  }
+
+  .why__photo img {
+    max-height: 320px;
+  }
+}
+
+@media (max-width: 767px) {
+  .why__list {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-6);
+  }
+
+  .why__item {
+    padding-left: 0;
+    padding-top: var(--sp-6);
+    border-left: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.22);
+  }
+
+  .why__item:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+}

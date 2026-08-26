@@ -1,0 +1,126 @@
+/* ==========================================================================
+   Section 02 — Hero
+   Navy stage, two columns: headline + actions on the left, a translucent
+   "Business Analytics en vivo" panel on the right. A blue ribbon sweeps
+   behind the panel and the block closes with the measured bottom wave.
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  padding-top: calc(var(--header-h) + clamp(3rem, 6vw, 6.5rem));
+  padding-bottom: clamp(9rem, 14vw, 15rem);
+  background-color: var(--c-navy);
+  color: var(--c-on-dark);
+  overflow: hidden;
+}
+
+/* Soft blue glow behind the analytics panel. */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-decor);
+  background: var(--grad-hero-glow);
+  pointer-events: none;
+}
+
+.hero__inner {
+  position: relative;
+  z-index: var(--z-content);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.02fr);
+  align-items: center;
+  gap: clamp(var(--sp-8), 5vw, var(--sp-11));
+}
+
+/* --- Copy ----------------------------------------------------------------- */
+
+.hero__title {
+  color: var(--c-on-dark);
+  max-width: 14ch;
+}
+
+.hero__text {
+  max-width: 52ch;
+  margin-top: var(--sp-6);
+  color: var(--c-on-dark-muted);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-4);
+  margin-top: var(--sp-8);
+}
+
+/* --- Analytics visual ----------------------------------------------------- */
+
+.hero__visual {
+  position: relative;
+  z-index: var(--z-content);
+}
+
+.hero__visual img {
+  width: 100%;
+  height: auto;
+  /* The laptop is a cut-out on transparency; a soft drop shadow lifts it off
+     the navy without boxing it back in. */
+  filter: drop-shadow(0 30px 55px rgba(0, 0, 0, 0.42));
+}
+
+/* --- Decorative ribbon ---------------------------------------------------- */
+
+/* Sweeps across the laptop at the height of its base, as the swoosh does in
+   the PDF. It stays below --z-content so it passes behind the device instead
+   of slicing through the screen. */
+.hero__ribbon {
+  position: absolute;
+  right: -10%;
+  bottom: 14%;
+  z-index: var(--z-decor);
+  width: 68%;
+  min-width: 480px;
+  pointer-events: none;
+}
+
+/* --- Bottom wave ---------------------------------------------------------- */
+
+.hero .wave--bottom {
+  z-index: var(--z-content);
+}
+
+/* --- Breakpoints ---------------------------------------------------------- */
+
+@media (max-width: 1023px) {
+  .hero__inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-8);
+  }
+
+  .hero__title {
+    max-width: 18ch;
+  }
+
+  /* Stacked, the laptop would otherwise run the full container width. */
+  .hero__visual {
+    max-width: 520px;
+    margin-inline: auto;
+  }
+
+  .hero__ribbon {
+    display: none;
+  }
+}
+
+@media (max-width: 599px) {
+  /* Clears the stats row, which is pulled up over the hero, plus the wave —
+     without this the laptop's base is hidden behind the first card. */
+  .hero {
+    padding-bottom: clamp(10rem, 34vw, 13rem);
+  }
+
+  .hero__actions .btn {
+    width: 100%;
+  }
+}

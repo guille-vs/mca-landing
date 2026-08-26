@@ -1,0 +1,116 @@
+/* ==========================================================================
+   Section 06 — Confían en nosotros
+   Headline on the left, three outlined logo panels on the right. Each panel's
+   pill label straddles its top border, as in the PDF.
+   ========================================================================== */
+
+.clients__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.72fr) minmax(0, 2fr);
+  align-items: center;
+  gap: clamp(var(--sp-7), 5vw, var(--sp-10));
+}
+
+.clients__title {
+  max-width: 14ch;
+}
+
+.clients__panels {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(var(--sp-4), 2vw, var(--sp-6));
+}
+
+.client-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Top padding clears the pill that overlaps the border. */
+  padding: calc(var(--sp-8) + var(--sp-4)) var(--sp-5) var(--sp-7);
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-lg);
+}
+
+.client-panel__label {
+  /* Lift the pill so it is centred on the panel's top edge. */
+  margin-top: calc(-1 * var(--sp-8) - var(--sp-7));
+  margin-bottom: var(--sp-6);
+}
+
+.client-panel__logos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(var(--sp-5), 2.4vw, var(--sp-7));
+  width: 100%;
+  height: 100%;
+}
+
+/* "Otros sectores" pairs two logos on its first row. */
+.client-panel__row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(var(--sp-4), 2vw, var(--sp-6));
+  width: 100%;
+}
+
+/* Optical sizing. A single max-height makes wide wordmarks tower over stacked
+   marks, so each logo gets the cap that equalises its perceived weight. The
+   `--cap` fallback covers any logo added later without its own rule. */
+.client-panel__logos img {
+  width: auto;
+  max-width: 82%;
+  max-height: var(--cap, 44px);
+  object-fit: contain;
+  transition: transform var(--dur) var(--ease);
+}
+
+.client-panel__logos img:hover {
+  transform: scale(1.05);
+}
+
+/* The source files are trimmed flush to their artwork, so each cap follows
+   the same rule: cap ≈ 62px / sqrt(aspect ratio). That holds the *area* of
+   every mark roughly constant instead of its height, which is what the eye
+   actually compares. */
+.client-panel__logos img[data-logo="kimberly-clark"] { --cap: 26px; }
+.client-panel__logos img[data-logo="financiera-oh"] { --cap: 26px; }
+.client-panel__logos img[data-logo="mac"] { --cap: 36px; }
+.client-panel__logos img[data-logo="bbva"] { --cap: 34px; }
+.client-panel__logos img[data-logo="fondo-mivivienda"] { --cap: 50px; }
+.client-panel__logos img[data-logo="quimica-suiza"] { --cap: 45px; }
+.client-panel__logos img[data-logo="scotiabank"] { --cap: 58px; }
+.client-panel__logos img[data-logo="diners-club"] { --cap: 60px; }
+.client-panel__logos img[data-logo="gilat"] { --cap: 68px; }
+
+/* These two share a row, so they also get a tighter max-width. */
+.client-panel__logos img[data-logo="3m"] {
+  --cap: 45px;
+  max-width: 44%;
+}
+
+.client-panel__logos img[data-logo="pecsa-gas"] {
+  --cap: 72px;
+  max-width: 44%;
+}
+
+/* --- Breakpoints ---------------------------------------------------------- */
+
+@media (max-width: 1023px) {
+  .clients__inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .clients__title {
+    max-width: 20ch;
+  }
+}
+
+@media (max-width: 767px) {
+  .clients__panels {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-9);
+  }
+}

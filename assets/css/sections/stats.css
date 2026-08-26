@@ -1,0 +1,121 @@
+/* ==========================================================================
+   Section 03 — Trust stats
+   Four cards straddle the hero's bottom wave, and the office photo slides up
+   underneath them. Measured from the PDF: the photo covers roughly the lower
+   70% of the card height, so the cards read as floating between both layers.
+   ========================================================================== */
+
+.stats {
+  position: relative;
+  z-index: 3;
+  /* Pull the whole block up into the navy hero. */
+  margin-top: calc(-1 * clamp(7rem, 11vw, 11.5rem));
+}
+
+.stats__grid {
+  position: relative;
+  top: 20px;
+  z-index: var(--z-content);
+  display: grid;
+  margin: 0px 40px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(var(--sp-4), 1.5vw, var(--sp-5));
+  /* Negative margin lets the photo rise behind the cards. */
+  margin-bottom: calc(-1 * clamp(5rem, 11vw, 13rem));
+}
+
+.stats__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+  padding: clamp(var(--sp-5), 2vw, var(--sp-7));
+  border-radius: var(--r-lg);
+  background-color: var(--c-white);
+  box-shadow: var(--sh-float);
+  transition: background-color var(--dur) var(--ease),
+              transform var(--dur) var(--ease),
+              box-shadow var(--dur) var(--ease);
+}
+
+.stats__icon {
+  color: var(--c-blue);
+  font-size: 3.1rem;
+  transition: color var(--dur) var(--ease);
+}
+
+/* --- Hover ---------------------------------------------------------------- */
+/* The PDF fills the first card permanently. Here that treatment is the hover
+   state of every card, so no single stat looks pre-selected. Behind
+   `hover: hover` so touch devices never latch into the filled state. */
+
+@media (hover: hover) {
+  .stats__card:hover {
+    background-color: var(--c-sky);
+    transform: translateY(-6px);
+  }
+
+  .stats__card:hover .stats__icon {
+    color: var(--c-navy);
+  }
+}
+
+.stats__value {
+  margin-top: auto;
+  color: var(--c-ink);
+  font-size: clamp(1.5rem, 1.2rem + 1.1vw, 2rem);
+  font-weight: var(--fw-medium);
+  line-height: 1.15;
+}
+
+.stats__desc {
+  color: var(--c-ink-muted);
+  font-size: var(--fs-body);
+  line-height: 1.45;
+}
+
+/* --- Photo ---------------------------------------------------------------- */
+
+.stats__photo {
+  position: relative;
+  z-index: var(--z-decor);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+
+.stats__photo img {
+  width: 100%;
+  aspect-ratio: 2.08 / 1;
+  object-fit: cover;
+}
+
+/* --- Breakpoints ---------------------------------------------------------- */
+
+@media (max-width: 1023px) {
+  .stats__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-bottom: calc(-1 * clamp(3rem, 8vw, 6rem));
+  }
+
+  .stats__photo img {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (max-width: 599px) {
+  .stats {
+    margin-top: calc(-1 * clamp(4rem, 14vw, 7rem));
+  }
+
+  .stats__grid {
+    grid-template-columns: minmax(0, 1fr);
+    margin-bottom: calc(-1 * var(--sp-8));
+  }
+
+  .stats__card {
+    gap: var(--sp-4);
+  }
+
+  .stats__photo img {
+    aspect-ratio: 4 / 3;
+  }
+}

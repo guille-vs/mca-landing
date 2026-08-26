@@ -1,0 +1,18 @@
+/* ==========================================================================
+   Manrope — self-hosted.
+   The brand file is the variable build (weight axis 200–800), so one request
+   covers every weight the page uses. Declaring the family as "Manrope" here
+   normalises the file's internal name ("Manrope ExtraLight", the axis default
+   at 200), which would otherwise leak into font matching.
+
+   Self-hosted rather than loaded from Google Fonts: no third-party request on
+   first paint, and the WordPress theme stays self-contained.
+   ========================================================================== */
+
+@font-face {
+  font-family: "Manrope";
+  src: url("../fonts/manrope-variable.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}

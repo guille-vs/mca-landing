@@ -1,0 +1,185 @@
+/* ==========================================================================
+   Section 01 — Site header
+   Fixed navigation. Transparent while it sits over the navy hero, then it
+   solidifies on scroll so it stays readable over the light sections.
+   ========================================================================== */
+
+.site-header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: var(--z-header);
+  background-color: transparent;
+  transition: background-color var(--dur) var(--ease),
+              box-shadow var(--dur) var(--ease);
+}
+
+.site-header.is-stuck {
+  background-color: var(--c-navy);
+  box-shadow: var(--sh-header);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-6);
+  min-height: var(--header-h);
+}
+
+.site-header__logo {
+  flex: none;
+  margin-right: auto;
+}
+
+.site-header__logo img {
+  width: auto;
+  height: clamp(38px, 3.2vw, 48px);
+}
+
+/* --- Navigation ----------------------------------------------------------- */
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(var(--sp-5), 2.6vw, var(--sp-9));
+}
+
+.nav__link {
+  position: relative;
+  color: var(--c-on-dark);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-medium);
+  transition: color var(--dur) var(--ease);
+}
+
+.nav__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+  background-color: var(--c-blue-bright);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur) var(--ease);
+}
+
+.nav__link:hover,
+.nav__link[aria-current="true"] {
+  color: var(--c-sky);
+}
+
+.nav__link:hover::after,
+.nav__link[aria-current="true"]::after {
+  transform: scaleX(1);
+}
+
+.site-header .btn {
+  flex: none;
+  min-height: 48px;
+  padding-inline: var(--sp-6);
+}
+
+/* --- Mobile toggle -------------------------------------------------------- */
+
+.nav-toggle {
+  display: none;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  margin-left: auto;
+  border-radius: var(--r-sm);
+  color: var(--c-on-dark);
+}
+
+.nav-toggle__bars {
+  position: relative;
+  display: block;
+  width: 24px;
+  height: 2px;
+  border-radius: 2px;
+  background-color: currentColor;
+  transition: background-color var(--dur) var(--ease);
+}
+
+.nav-toggle__bars::before,
+.nav-toggle__bars::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 24px;
+  height: 2px;
+  border-radius: 2px;
+  background-color: currentColor;
+  transition: transform var(--dur) var(--ease);
+}
+
+.nav-toggle__bars::before {
+  top: -7px;
+}
+
+.nav-toggle__bars::after {
+  top: 7px;
+}
+
+/* Burger morphs into a cross while the drawer is open. */
+.nav-toggle[aria-expanded="true"] .nav-toggle__bars {
+  background-color: transparent;
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle__bars::before {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle__bars::after {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* --- Breakpoint ----------------------------------------------------------- */
+
+@media (max-width: 1023px) {
+  .nav-toggle {
+    display: grid;
+  }
+
+  .nav {
+    position: fixed;
+    inset: var(--header-h) 0 auto;
+    z-index: var(--z-drawer);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: var(--sp-4) var(--container-pad) var(--sp-7);
+    background-color: var(--c-navy);
+    box-shadow: var(--sh-header);
+    /* Collapsed by default; the toggle flips the data attribute. */
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-12px);
+    transition: opacity var(--dur) var(--ease),
+                transform var(--dur) var(--ease),
+                visibility var(--dur) var(--ease);
+  }
+
+  .nav[data-open="true"] {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+  }
+
+  .nav__link {
+    padding-block: var(--sp-4);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 1.125rem;
+  }
+
+  .nav__link::after {
+    display: none;
+  }
+
+  .nav .btn {
+    margin-top: var(--sp-5);
+    width: 100%;
+  }
+}

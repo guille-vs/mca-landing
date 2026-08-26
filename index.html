@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Master Center Américas — Contact Center y BPO para la banca peruana</title>
+<meta name="description" content="17 años de Contact Center, gestión de campo y Business Analytics con certificación ISO 9001 y metodología COPC para bancos, financieras y cooperativas del Perú.">
+<meta name="theme-color" content="#16273e">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_PE">
+<meta property="og:title" content="Master Center Américas — Contact Center y BPO para la banca peruana">
+<meta property="og:description" content="Contact Center, gestión de campo y Business Analytics con certificación ISO 9001, operando bajo metodología COPC.">
+<meta property="og:image" content="assets/img/photos/office.jpg">
+
+<!-- Self-hosted brand font. `crossorigin` is required even same-origin:
+     fonts are always fetched in CORS mode, and without it the preload is
+     discarded and the file downloaded twice. -->
+<link rel="preload" href="assets/fonts/manrope-variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/fonts.css">
+
+<!-- One stylesheet per section: each maps 1:1 to a WordPress template part. -->
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/icons.css">
+<link rel="stylesheet" href="assets/css/sections/header.css">
+<link rel="stylesheet" href="assets/css/sections/hero.css">
+<link rel="stylesheet" href="assets/css/sections/stats.css">
+<link rel="stylesheet" href="assets/css/sections/about.css">
+<link rel="stylesheet" href="assets/css/sections/services.css">
+<link rel="stylesheet" href="assets/css/sections/clients.css">
+<link rel="stylesheet" href="assets/css/sections/why.css">
+<link rel="stylesheet" href="assets/css/sections/method.css">
+<link rel="stylesheet" href="assets/css/sections/blog.css">
+<link rel="stylesheet" href="assets/css/sections/cta.css">
+<link rel="stylesheet" href="assets/css/sections/footer.css">
+
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+<!-- ==========================================================================
+     01 — Header
+     ========================================================================== -->
+<header class="site-header" id="site-header" data-js="header">
+  <div class="container site-header__inner">
+    <a class="site-header__logo" href="#inicio" aria-label="Master Center Américas, ir al inicio">
+      <img src="assets/img/brand/logo-mca.png" alt="Master Center Américas" width="1785" height="257">
+    </a>
+
+    <button class="nav-toggle" type="button" data-js="nav-toggle"
+            aria-expanded="false" aria-controls="nav-primary" aria-label="Abrir menú">
+      <span class="nav-toggle__bars" aria-hidden="true"></span>
+    </button>
+
+    <!-- Order mirrors the order the sections appear in on the page. -->
+    <nav class="nav" id="nav-primary" data-js="nav" aria-label="Navegación principal">
+      <a class="nav__link" href="#nosotros">Nosotros</a>
+      <a class="nav__link" href="#servicios">Servicios</a>
+      <a class="nav__link" href="#metodologia">Metodología</a>
+      <a class="nav__link" href="#contacto">Contacto</a>
+      <a class="btn btn--primary" href="#contacto">Agenda tu reunión</a>
+    </nav>
+  </div>
+</header>
+
+
+<main id="contenido">
+
+  <!-- ========================================================================
+       02 — Hero
+       ======================================================================== -->
+  <section class="hero" id="inicio">
+    <div class="container hero__inner">
+      <div class="hero__copy">
+        <h1 class="hero__title" data-reveal>17 años convirtiendo contacto en resultados para la banca peruana.</h1>
+
+        <p class="hero__text lead" data-reveal style="--reveal-delay:90ms">
+          Contact Center, gestión de campo y Business Analytics con certificación ISO 9001,
+          operando bajo metodología COPC para bancos, financieras y cooperativas que
+          necesitan resultados medibles, no promesas genéricas.
+        </p>
+
+        <div class="hero__actions" data-reveal style="--reveal-delay:180ms">
+          <a class="btn btn--primary" href="#contacto">Solicitar reunión comercial</a>
+          <!-- TODO: replace with the real WhatsApp business number -->
+          <a class="btn btn--ghost" href="https://wa.me/51000000000" target="_blank" rel="noopener">
+            Hablar por Whatsapp
+          </a>
+        </div>
+      </div>
+
+      <figure class="hero__visual" data-reveal style="--reveal-delay:240ms">
+        <img src="assets/img/photos/laptop-analytics.png"
+             alt="Panel de Business Analytics de Master Center Américas mostrando indicadores en vivo"
+             width="1200" height="762" fetchpriority="high" decoding="async">
+      </figure>
+    </div>
+
+    <img class="hero__ribbon" src="assets/img/photos/hero-ribbon.png"
+         alt="" width="1600" height="910" aria-hidden="true" decoding="async">
+
+    <!-- Curve traced from the PDF: ~125 units of rise across the 1920 canvas. -->
+    <div class="wave wave--bottom" aria-hidden="true">
+      <svg viewBox="0 0 1920 125" preserveAspectRatio="none">
+        <path d="M0 125C480 55 1200 90 1920 0v125z" fill="#ffffff"/>
+      </svg>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       03 — Trust stats
+       ======================================================================== -->
+  <section class="stats" aria-label="Cifras y certificaciones">
+    <div class="container">
+      <ul class="stats__grid">
+        <li class="stats__card" data-reveal>
+          <span class="icon icon--star-check stats__icon" aria-hidden="true"></span>
+          <p class="stats__value">17+ años</p>
+          <p class="stats__desc">de experiencia operando desde 2009</p>
+        </li>
+        <li class="stats__card" data-reveal style="--reveal-delay:80ms">
+          <span class="icon icon--flag stats__icon" aria-hidden="true"></span>
+          <p class="stats__value">100% capital</p>
+          <p class="stats__desc">nacional peruano</p>
+        </li>
+        <li class="stats__card" data-reveal style="--reveal-delay:160ms">
+          <span class="icon icon--seal-check stats__icon" aria-hidden="true"></span>
+          <p class="stats__value">ISO 9001:2015</p>
+          <p class="stats__desc">Procesos de calidad certificados</p>
+        </li>
+        <li class="stats__card" data-reveal style="--reveal-delay:240ms">
+          <span class="icon icon--gear-refresh stats__icon" aria-hidden="true"></span>
+          <p class="stats__value">Metodología COPC</p>
+          <p class="stats__desc">Gestión basada en resultados</p>
+        </li>
+      </ul>
+
+      <figure class="stats__photo" data-reveal>
+        <img src="assets/img/photos/office.jpg"
+             alt="Equipo de Master Center Américas trabajando en la plataforma de contact center"
+             width="2000" height="1335" loading="lazy" decoding="async">
+      </figure>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       04 — Quiénes somos
+       ======================================================================== -->
+  <section class="section about" id="nosotros">
+    <div class="container about__inner">
+      <div data-reveal>
+        <span class="eyebrow">Quiénes somos</span>
+        <h2 class="about__title">Factor humano, tecnología y experiencia especializada</h2>
+      </div>
+
+      <div class="about__body" data-reveal style="--reveal-delay:120ms">
+        <p>
+          Master Center Américas inicia operaciones en 2009 para ofrecer soluciones integrales
+          de BPO, contact center y ahora fuvex. Desde la atención de llamadas inbound, outbound,
+          gestión de canales digitales y campo, en las diversas áreas de negocio como ventas,
+          cobranzas y customer service.
+        </p>
+        <p>
+          Combinamos tecnología, procesos certificados y talento especializado para que nuestros
+          clientes en el sector financiero tomen decisiones con información viva.
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       05 — Servicios
+       ======================================================================== -->
+  <section class="section services" id="servicios">
+    <div class="container">
+      <header class="section-head" data-reveal>
+        <h2>Soluciones de gestión y servicio.</h2>
+      </header>
+
+      <ul class="services__grid">
+        <li class="service" data-reveal>
+          <span class="icon-badge service__badge" aria-hidden="true">
+            <span class="icon icon--headset" aria-hidden="true"></span>
+          </span>
+          <h3 class="service__title">Telemarketing</h3>
+          <p class="service__text">Campañas de captación y venta con protocolos y speech auditados bajo COPC.</p>
+        </li>
+
+        <li class="service" data-reveal style="--reveal-delay:80ms">
+          <span class="icon-badge service__badge" aria-hidden="true">
+            <span class="icon icon--headset" aria-hidden="true"></span>
+          </span>
+          <h3 class="service__title">Atención al cliente</h3>
+          <p class="service__text">Servicio permanente centrado en la experiencia y satisfacción plena del cliente.</p>
+        </li>
+
+        <li class="service" data-reveal style="--reveal-delay:160ms">
+          <span class="icon-badge service__badge" aria-hidden="true">
+            <span class="icon icon--headset" aria-hidden="true"></span>
+          </span>
+          <h3 class="service__title">Gestión de campo</h3>
+          <p class="service__text">Cobertura en terreno con seguimiento y reportería estratégica en tiempo real.</p>
+        </li>
+
+        <li class="service" data-reveal>
+          <span class="icon-badge service__badge" aria-hidden="true">
+            <span class="icon icon--headset" aria-hidden="true"></span>
+          </span>
+          <h3 class="service__title">Cobranzas</h3>
+          <p class="service__text">Gestión de recuperación con enfoque en resultados y cumplimiento normativo.</p>
+        </li>
+
+        <li class="service" data-reveal style="--reveal-delay:80ms">
+          <span class="icon-badge service__badge" aria-hidden="true">
+            <span class="icon icon--headset" aria-hidden="true"></span>
+          </span>
+          <h3 class="service__title">Back Office y reclamos</h3>
+          <p class="service__text">Procesamiento administrativo y gestión de reclamos con trazabilidad completa.</p>
+        </li>
+
+        <li class="service" data-reveal style="--reveal-delay:160ms">
+          <span class="icon-badge service__badge" aria-hidden="true">
+            <span class="icon icon--nodes" aria-hidden="true"></span>
+          </span>
+          <h3 class="service__title">Canales digitales</h3>
+          <p class="service__text">
+            Plataforma omnicanal para administrar tus RR.SS, WhatsApp, mailing en una sola
+            plataforma. Además de nuestros agentes virtuales de voz y canal escrito.
+          </p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       06 — Clientes
+       ======================================================================== -->
+  <section class="section clients" aria-label="Clientes">
+    <div class="container clients__inner">
+      <h2 class="clients__title" data-reveal>Confían en nosotros bancos, financieras y organismos del estado</h2>
+
+      <div class="clients__panels">
+        <article class="client-panel" data-reveal>
+          <span class="pill pill--blue client-panel__label">Sector financiero</span>
+          <div class="client-panel__logos">
+            <img data-logo="bbva" src="assets/img/logos/bbva.png" alt="BBVA" loading="lazy" decoding="async">
+            <img data-logo="financiera-oh" src="assets/img/logos/financiera-oh.png" alt="Financiera Oh!" loading="lazy" decoding="async">
+            <img data-logo="diners-club" src="assets/img/logos/diners-club.png" alt="Diners Club International" loading="lazy" decoding="async">
+            <img data-logo="scotiabank" src="assets/img/logos/scotiabank.png" alt="Scotiabank" loading="lazy" decoding="async">
+          </div>
+        </article>
+
+        <article class="client-panel" data-reveal style="--reveal-delay:100ms">
+          <span class="pill pill--navy client-panel__label">Sector estatal</span>
+          <div class="client-panel__logos">
+            <img data-logo="fondo-mivivienda" src="assets/img/logos/fondo-mivivienda.png" alt="Fondo Mivivienda" loading="lazy" decoding="async">
+            <img data-logo="mac" src="assets/img/logos/mac.png" alt="MAC — Mejor Atención al Ciudadano" loading="lazy" decoding="async">
+            <img data-logo="gilat" src="assets/img/logos/gilat.png" alt="Gilat Satellite Networks" loading="lazy" decoding="async">
+          </div>
+        </article>
+
+        <article class="client-panel" data-reveal style="--reveal-delay:200ms">
+          <span class="pill pill--sky client-panel__label">Otros sectores</span>
+          <div class="client-panel__logos">
+            <div class="client-panel__row">
+              <img data-logo="3m" src="assets/img/logos/3m.png" alt="3M" loading="lazy" decoding="async">
+              <img data-logo="pecsa-gas" src="assets/img/logos/pecsa-gas.png" alt="Pecsa Gas" loading="lazy" decoding="async">
+            </div>
+            <img data-logo="quimica-suiza" src="assets/img/logos/quimica-suiza.png" alt="Química Suiza" loading="lazy" decoding="async">
+            <img data-logo="kimberly-clark" src="assets/img/logos/kimberly-clark.png" alt="Kimberly-Clark" loading="lazy" decoding="async">
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       07 — ¿Por qué trabajar con nosotros?
+       ======================================================================== -->
+  <section class="why" id="por-que">
+    <div class="container why__inner">
+      <div class="why__panel" data-reveal>
+        <h2 class="why__title">¿Por qué trabajar con nosotros?</h2>
+
+        <ul class="why__list">
+          <li class="why__item">
+            <h3 class="why__item-title">Especialización financiera</h3>
+            <p class="why__item-text">17 años enfocados en banca y financieras.</p>
+          </li>
+          <li class="why__item">
+            <h3 class="why__item-title">Altos estándares de calidad</h3>
+            <p class="why__item-text">Certificados en ISO 9001, metodología COPC y en camino hacia la certificación ISO 27000.</p>
+          </li>
+          <li class="why__item">
+            <h3 class="why__item-title">Gestión antifraude</h3>
+            <p class="why__item-text">Gestión de mesas de control, que garantizan 100% de la calidad de las ventas y sus procesos, que tienen como resultado ventas certificadas y libres de malas praxis.</p>
+          </li>
+        </ul>
+      </div>
+
+      <figure class="why__photo" data-reveal style="--reveal-delay:120ms">
+        <img src="assets/img/photos/call-center.jpg"
+             alt="Agentes de contact center atendiendo llamadas con diadema"
+             width="320" height="400" loading="lazy" decoding="async">
+      </figure>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       08 — Metodología
+       ======================================================================== -->
+  <section class="section method" id="metodologia">
+    <div class="container">
+      <header class="section-head" data-reveal>
+        <h2>Ciclo virtuoso, no un simple ofrecimiento</h2>
+      </header>
+
+      <ol class="method__steps">
+        <li class="method__step" data-reveal>
+          <span class="icon-badge icon-badge--gradient" aria-hidden="true">
+            <span class="icon icon--search" aria-hidden="true"></span>
+          </span>
+          <p class="method__step-no">Paso 1</p>
+          <p class="method__step-label">Diagnóstico</p>
+        </li>
+        <li class="method__step" data-reveal style="--reveal-delay:80ms">
+          <span class="icon-badge icon-badge--gradient" aria-hidden="true">
+            <span class="icon icon--puzzle" aria-hidden="true"></span>
+          </span>
+          <p class="method__step-no">Paso 2</p>
+          <p class="method__step-label">Estrategia</p>
+        </li>
+        <li class="method__step" data-reveal style="--reveal-delay:160ms">
+          <span class="icon-badge icon-badge--gradient" aria-hidden="true">
+            <span class="icon icon--chart-cycle" aria-hidden="true"></span>
+          </span>
+          <p class="method__step-no">Paso 3</p>
+          <p class="method__step-label">Implementación</p>
+        </li>
+        <li class="method__step" data-reveal style="--reveal-delay:240ms">
+          <span class="icon-badge icon-badge--gradient" aria-hidden="true">
+            <span class="icon icon--chart-up" aria-hidden="true"></span>
+          </span>
+          <p class="method__step-no">Paso 4</p>
+          <p class="method__step-label">Medición</p>
+        </li>
+        <li class="method__step" data-reveal style="--reveal-delay:320ms">
+          <span class="icon-badge icon-badge--gradient" aria-hidden="true">
+            <span class="icon icon--gear-cycle" aria-hidden="true"></span>
+          </span>
+          <p class="method__step-no">Paso 5</p>
+          <p class="method__step-label">Optimización</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       09 — Blog
+       ======================================================================== -->
+  <section class="section blog" aria-label="Blog y artículos destacados">
+    <div class="container">
+      <header class="section-head" data-reveal>
+        <h2>Blog / artículos destacados</h2>
+      </header>
+
+      <div class="blog__grid">
+        <!-- TODO: replaced by the WP_Query loop over the `post` post type. -->
+        <article class="post" data-reveal>
+          <div class="post__media">
+            <img src="assets/img/photos/blog-thumb.jpg" alt="" loading="lazy" decoding="async">
+          </div>
+          <div class="post__body">
+            <h3 class="post__title">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</h3>
+            <a class="link-arrow post__link" href="#">
+              Leer artículo
+              <svg class="icon-svg" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="post" data-reveal style="--reveal-delay:100ms">
+          <div class="post__media">
+            <img src="assets/img/photos/blog-thumb.jpg" alt="" loading="lazy" decoding="async">
+          </div>
+          <div class="post__body">
+            <h3 class="post__title">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</h3>
+            <a class="link-arrow post__link" href="#">
+              Leer artículo
+              <svg class="icon-svg" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+            </a>
+          </div>
+        </article>
+
+        <article class="post" data-reveal style="--reveal-delay:200ms">
+          <div class="post__media">
+            <img src="assets/img/photos/blog-thumb.jpg" alt="" loading="lazy" decoding="async">
+          </div>
+          <div class="post__body">
+            <h3 class="post__title">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</h3>
+            <a class="link-arrow post__link" href="#">
+              Leer artículo
+              <svg class="icon-svg" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================================
+       10 — CTA final
+       ======================================================================== -->
+  <section class="cta" id="contacto">
+    <div class="cta__shoulder" aria-hidden="true">
+      <svg viewBox="0 0 1920 125" preserveAspectRatio="none">
+        <path d="M0 125C480 55 1200 90 1920 0v125z" fill="#16273e"/>
+      </svg>
+    </div>
+
+    <div class="container cta__inner">
+      <div>
+        <h2 class="cta__title" data-reveal>Compártenos tu necesidad y hablemos de soluciones con resultados tangibles.</h2>
+        <p class="cta__text" data-reveal style="--reveal-delay:100ms">
+          Agenda una reunión con nuestro equipo comercial y revisemos cómo aplicar 17 años
+          de experiencia financiera a tu operación.
+        </p>
+      </div>
+
+      <div class="cta__actions" data-reveal style="--reveal-delay:180ms">
+        <div class="cta__primary">
+          <!-- TODO: point at the real booking form / Calendly URL -->
+          <a class="btn btn--primary" href="#">Solicitar reunión comercial</a>
+          <a class="btn-arrow" href="#" aria-label="Solicitar reunión comercial">
+            <svg class="icon-svg" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+          </a>
+        </div>
+        <a class="btn btn--ghost" href="https://wa.me/51000000000" target="_blank" rel="noopener">
+          Hablar por Whatsapp
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+
+<!-- ==========================================================================
+     11 — Footer
+     ========================================================================== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__top">
+      <div class="site-footer__logo">
+        <img src="assets/img/brand/logo-mca.png" alt="Master Center Américas" width="1785" height="257" loading="lazy">
+      </div>
+
+      <p class="site-footer__blurb">
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
+      </p>
+
+      <div>
+        <h2 class="site-footer__heading">Contáctanos</h2>
+        <!-- TODO: replace the placeholder phone and e-mail with the real ones -->
+        <ul class="contact-list">
+          <li>
+            <a href="tel:+51000000000">
+              <span class="icon icon--phone" aria-hidden="true"></span>
+              +51 000 000 000
+            </a>
+          </li>
+          <li>
+            <a href="mailto:correo@dominio.com">
+              <span class="icon icon--mail" aria-hidden="true"></span>
+              correo@dominio.com
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="social">
+        <a href="#" aria-label="LinkedIn de Master Center Américas" target="_blank" rel="noopener">
+          <svg class="icon-svg" aria-hidden="true"><use href="#i-linkedin"></use></svg>
+        </a>
+        <a href="#" aria-label="Facebook de Master Center Américas" target="_blank" rel="noopener">
+          <svg class="icon-svg" aria-hidden="true"><use href="#i-facebook"></use></svg>
+        </a>
+      </div>
+    </div>
+
+    <p class="site-footer__legal">© 2026 Master Center Américas S.A.C.</p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>

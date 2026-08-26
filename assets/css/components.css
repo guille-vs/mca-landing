@@ -1,0 +1,217 @@
+/* ==========================================================================
+   Components — reusable pieces shared by more than one section
+   ========================================================================== */
+
+/* --- Buttons -------------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  min-height: 52px;
+  padding: var(--sp-3) var(--sp-6);
+  border: 1.5px solid transparent;
+  border-radius: var(--r-pill);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  line-height: 1.2;
+  text-align: center;
+  transition: background-color var(--dur) var(--ease),
+              border-color var(--dur) var(--ease),
+              color var(--dur) var(--ease),
+              transform var(--dur-fast) var(--ease),
+              box-shadow var(--dur) var(--ease);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+/* Filled — the single primary action of each block. */
+.btn--primary {
+  background-color: var(--c-blue-bright);
+  color: var(--c-white);
+  box-shadow: 0 12px 26px -14px rgba(46, 128, 180, 0.9);
+}
+
+.btn--primary:hover {
+  background-color: var(--c-blue-hover);
+  box-shadow: 0 18px 34px -14px rgba(46, 128, 180, 0.95);
+}
+
+/* Outline on dark surfaces. */
+.btn--ghost {
+  border-color: var(--c-blue-bright);
+  color: var(--c-white);
+}
+
+.btn--ghost:hover {
+  border-color: var(--c-sky);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Outline on light surfaces. */
+.btn--outline {
+  border-color: var(--c-blue);
+  color: var(--c-blue);
+}
+
+.btn--outline:hover {
+  background-color: var(--c-blue);
+  color: var(--c-white);
+}
+
+.btn--block {
+  width: 100%;
+}
+
+/* Circular arrow that sits next to the CTA button in the design. */
+.btn-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: var(--c-blue-bright);
+  color: var(--c-white);
+  font-size: 1.375rem;
+  transition: background-color var(--dur) var(--ease),
+              transform var(--dur-fast) var(--ease);
+}
+
+.btn-arrow:hover {
+  background-color: var(--c-blue-hover);
+  transform: translateX(4px);
+}
+
+/* Inline text link with a trailing arrow ("Leer artículo"). */
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-3);
+  color: var(--c-blue);
+  font-weight: var(--fw-medium);
+}
+
+.link-arrow .icon-svg {
+  font-size: 1.25rem;
+  transition: transform var(--dur) var(--ease);
+}
+
+.link-arrow:hover .icon-svg {
+  transform: translateX(5px);
+}
+
+/* --- Section heading ------------------------------------------------------ */
+
+/* Sized in rem, not ch: this wrapper inherits the body font-size, so a `ch`
+   cap here would be measured against 17px and wrap the much larger heading. */
+.section-head {
+  max-width: 58rem;
+  margin-bottom: var(--sp-8);
+}
+
+.section-head--wide {
+  max-width: 72rem;
+}
+
+/* --- Surface cards -------------------------------------------------------- */
+
+.card {
+  position: relative;
+  border-radius: var(--r-lg);
+  background-color: var(--c-white);
+  box-shadow: var(--sh-card);
+  transition: transform var(--dur) var(--ease),
+              box-shadow var(--dur) var(--ease);
+}
+
+.card--hoverable:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--sh-card-hover);
+}
+
+/* --- Circular icon badge -------------------------------------------------- */
+/* Used by the service cards, where it deliberately hangs off the top-left
+   corner of the card, and by the methodology steps. */
+
+.icon-badge {
+  display: grid;
+  place-items: center;
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  background-color: var(--c-sky);
+  color: var(--c-white);
+  font-size: 2.8rem;
+}
+
+.icon-badge--gradient {
+  background: var(--grad-step);
+}
+
+/* --- Pill label ----------------------------------------------------------- */
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 54px;
+  padding: var(--sp-3) var(--sp-7);
+  border-radius: var(--r-pill);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-medium);
+  white-space: nowrap;
+}
+
+.pill--blue {
+  background-color: var(--c-blue);
+  color: var(--c-white);
+}
+
+.pill--navy {
+  background-color: var(--c-navy);
+  color: var(--c-white);
+}
+
+/* The mock puts white on --c-sky, which lands at 1.9:1 and fails WCAG AA.
+   Navy on the same background keeps the colour and reaches 8.4:1. */
+.pill--sky {
+  background-color: var(--c-sky);
+  color: var(--c-navy);
+}
+
+/* --- Section wave --------------------------------------------------------- */
+/* The PDF ends the hero and opens the final CTA with a shallow curve that
+   rises to the right (measured: ~120px of rise across the 1920px canvas).
+   An SVG keeps that arc exact at any width; border-radius cannot. */
+
+.wave {
+  position: absolute;
+  left: 50%;
+  z-index: var(--z-decor);
+  width: 101%;
+  min-width: 1000px;
+  height: clamp(48px, 6vw, 104px);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.wave--bottom {
+  bottom: -1px;
+}
+
+.wave--top {
+  top: -1px;
+}
+
+.wave svg {
+  width: 100%;
+  height: 100%;
+}

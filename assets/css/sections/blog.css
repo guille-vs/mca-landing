@@ -1,0 +1,102 @@
+/* ==========================================================================
+   Section 09 — Blog / artículos destacados
+   Three horizontal cards: square thumbnail on the left, excerpt and link
+   on the right. The whole card is the click target.
+   ========================================================================== */
+
+.blog__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(var(--sp-4), 2vw, var(--sp-6));
+}
+
+.post {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+  align-items: stretch;
+  gap: var(--sp-4);
+  padding: var(--sp-4);
+  border-radius: var(--r-md);
+  background-color: var(--c-white);
+  box-shadow: var(--sh-card);
+  transition: transform var(--dur) var(--ease),
+              box-shadow var(--dur) var(--ease);
+}
+
+.post:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--sh-card-hover);
+}
+
+.post__media {
+  border-radius: var(--r-sm);
+  overflow: hidden;
+}
+
+.post__media img {
+  width: 100%;
+  height: 100%;
+  min-height: 170px;
+  object-fit: cover;
+  transition: transform var(--dur-slow) var(--ease);
+}
+
+.post:hover .post__media img {
+  transform: scale(1.06);
+}
+
+.post__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--sp-5);
+  padding-right: var(--sp-2);
+}
+
+.post__title {
+  color: var(--c-ink);
+  font-size: var(--fs-lead);
+  font-weight: var(--fw-regular);
+  line-height: 1.4;
+}
+
+/* The link is decorative here: the card's stretched link owns the interaction. */
+.post__link {
+  font-size: var(--fs-small);
+}
+
+/* Stretched link keeps one accessible anchor per card. */
+.post__link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.post {
+  position: relative;
+}
+
+/* --- Breakpoints ---------------------------------------------------------- */
+
+@media (max-width: 1023px) {
+  .blog__grid {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 640px;
+  }
+}
+
+@media (max-width: 479px) {
+  .post {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .post__media img {
+    min-height: 0;
+    aspect-ratio: 16 / 9;
+  }
+
+  .post__body {
+    padding: 0 var(--sp-2) var(--sp-3);
+  }
+}

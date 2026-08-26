@@ -1,0 +1,80 @@
+/* ==========================================================================
+   Brand icons (assets/img/icons/)
+
+   The supplied files are flat PNGs in a fixed ink colour, which would freeze
+   them white or blue wherever they land. Painting them as a CSS mask instead
+   uses only their alpha channel, so `background-color: currentColor` lets every
+   icon inherit colour exactly like the inline SVGs did — hover states, the
+   sky-tinted footer icons and the dark service badges all keep working.
+
+   This includes the star: its check mark is knocked out of the artwork rather
+   than painted white, so the hole keeps showing whatever sits behind it.
+   ========================================================================== */
+
+.icon {
+  display: block;
+  width: 1em;
+  height: 1em;
+  flex: none;
+  background-color: currentColor;
+  -webkit-mask-position: center;
+          mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+          mask-size: contain;
+  -webkit-mask-image: var(--icon);
+          mask-image: var(--icon);
+  transition: background-color var(--dur) var(--ease);
+}
+
+/* Services */
+.icon--headset   { --icon: url("../img/icons/headset.png"); }
+.icon--nodes     { --icon: url("../img/icons/nodes.png"); }
+
+/* Stats */
+.icon--star-check   { --icon: url("../img/icons/star-check.png"); }
+.icon--flag         { --icon: url("../img/icons/flag.png"); }
+.icon--seal-check   { --icon: url("../img/icons/seal-check.png"); }
+.icon--gear-refresh { --icon: url("../img/icons/gear-refresh.png"); }
+
+/* Methodology steps */
+.icon--search      { --icon: url("../img/icons/search.png"); }
+.icon--puzzle      { --icon: url("../img/icons/puzzle.png"); }
+.icon--chart-cycle { --icon: url("../img/icons/chart-cycle.png"); }
+.icon--chart-up    { --icon: url("../img/icons/chart-up.png"); }
+.icon--gear-cycle  { --icon: url("../img/icons/gear-cycle.png"); }
+
+/* Footer contact */
+.icon--phone { --icon: url("../img/icons/phone.png"); }
+.icon--mail  { --icon: url("../img/icons/mail.png"); }
+
+/* --- Inline SVG icons ----------------------------------------------------- */
+/* No brand asset exists for the arrow or the social marks, so those three stay
+   as inline SVG and need the stroke defaults the mask rules above replace. */
+
+.icon-svg {
+  display: block;
+  width: 1em;
+  height: 1em;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* --- No-mask fallback ----------------------------------------------------- */
+/* Masking is supported everywhere current, but a browser without it would
+   paint solid currentColor blocks. Fall back to the raw artwork instead. */
+
+@supports not ((-webkit-mask-image: url("")) or (mask-image: url(""))) {
+  .icon {
+    background-color: transparent;
+    background-image: var(--icon);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+}

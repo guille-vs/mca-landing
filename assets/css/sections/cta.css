@@ -1,0 +1,90 @@
+/* ==========================================================================
+   Section 10 — Final CTA
+   Full-bleed gradient band. A navy wedge with the measured curve sits above
+   it so the band appears to be cut out of the footer's dark mass.
+   ========================================================================== */
+
+.cta {
+  position: relative;
+  isolation: isolate;
+  padding-block: clamp(var(--sp-9), 7vw, var(--sp-11));
+  background: var(--grad-cta);
+  color: var(--c-on-dark);
+}
+
+/* Navy shoulder carrying the top wave. */
+.cta__shoulder {
+  position: absolute;
+  inset: auto 0 100% 0;
+  height: clamp(48px, 6vw, 104px);
+  pointer-events: none;
+}
+
+.cta__shoulder svg {
+  width: 100%;
+  height: 100%;
+}
+
+.cta__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(var(--sp-7), 5vw, var(--sp-10));
+}
+
+.cta__title {
+  max-width: 20ch;
+  color: var(--c-on-dark);
+}
+
+.cta__text {
+  max-width: 46ch;
+  margin-top: var(--sp-5);
+  color: var(--c-on-dark-muted);
+}
+
+.cta__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sp-4);
+}
+
+/* Primary action pairs the pill with a detached circular arrow. */
+.cta__primary {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.cta__actions .btn {
+  min-width: 260px;
+}
+
+/* --- Breakpoints ---------------------------------------------------------- */
+
+@media (max-width: 899px) {
+  .cta__inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .cta__title {
+    max-width: 24ch;
+  }
+}
+
+@media (max-width: 479px) {
+  .cta__actions,
+  .cta__primary {
+    width: 100%;
+  }
+
+  .cta__actions .btn {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .cta__primary .btn-arrow {
+    flex: none;
+  }
+}

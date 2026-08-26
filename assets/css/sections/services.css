@@ -1,0 +1,99 @@
+/* ==========================================================================
+   Section 05 — Soluciones de gestión y servicio
+   3 x 2 grid. Each card carries a circular icon badge that deliberately hangs
+   off its top-left corner; the last card is inverted as the featured one.
+   ========================================================================== */
+
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  /* Row gap absorbs the badge that overhangs the next row's cards. */
+  column-gap: clamp(var(--sp-5), 2.4vw, var(--sp-7));
+  row-gap: clamp(var(--sp-8), 5vw, var(--sp-10));
+}
+
+.service {
+  position: relative;
+  /* Space reserved on the left/top for the overhanging badge. */
+  margin-left: 38px;
+  padding: var(--sp-8) clamp(var(--sp-5), 2vw, var(--sp-6)) var(--sp-7);
+  border-radius: var(--r-lg);
+  background-color: var(--c-white);
+  box-shadow: var(--sh-card);
+  transition: transform var(--dur) var(--ease),
+              box-shadow var(--dur) var(--ease);
+}
+
+.service__badge {
+  position: absolute;
+  top: -32px;
+  left: -38px;
+  transition: background-color var(--dur) var(--ease);
+}
+
+.service__title {
+  margin-bottom: var(--sp-3);
+  color: var(--c-ink);
+  font-weight: var(--fw-medium);
+  transition: color var(--dur) var(--ease);
+}
+
+.service__text {
+  color: var(--c-ink-muted);
+  line-height: 1.55;
+  transition: color var(--dur) var(--ease);
+}
+
+/* --- Hover ---------------------------------------------------------------- */
+/* The PDF marks one card as permanently dark. Here that inverted treatment is
+   the hover state of every card instead, so no single service looks pre-picked.
+   Behind `hover: hover` so touch devices never latch into the dark state. */
+
+@media (hover: hover) {
+  .service:hover {
+    transform: translateY(-6px);
+    background-color: var(--c-navy-soft);
+    box-shadow: var(--sh-card-hover);
+  }
+
+  .service:hover .service__title {
+    color: var(--c-on-dark);
+  }
+
+  .service:hover .service__text {
+    color: var(--c-on-dark-muted);
+  }
+
+  .service:hover .service__badge {
+    background-color: var(--c-navy);
+  }
+}
+
+/* --- Breakpoints ---------------------------------------------------------- */
+
+@media (max-width: 1023px) {
+  .services__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 639px) {
+  .services__grid {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--sp-9);
+  }
+
+  .service {
+    margin-left: 28px;
+  }
+
+  .service__badge {
+    left: -28px;
+  }
+
+  .icon-badge {
+    width: 62px;
+    height: 62px;
+    font-size: 1.65rem;
+  }
+}
