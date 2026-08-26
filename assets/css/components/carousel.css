@@ -96,7 +96,7 @@
   }
 }
 
-/* --- Buttons -------------------------------------------------------------- */
+/* --- Arrows --------------------------------------------------------------- */
 
 .carousel__btn {
   display: grid;
@@ -122,6 +122,7 @@
   cursor: default;
 }
 
+/* One arrow glyph, mirrored for the other direction. */
 .carousel__btn--prev .icon-svg {
   transform: scaleX(-1);
 }
@@ -149,6 +150,10 @@
 .carousel__dot[aria-current="true"] {
   width: 26px;
   background-color: var(--c-blue);
+}
+
+.carousel__dot:hover {
+  background-color: var(--c-blue-bright);
 }
 
 /* --- On dark surfaces ----------------------------------------------------- */

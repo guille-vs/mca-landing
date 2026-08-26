@@ -433,46 +433,57 @@
         <h2>Blog / artículos destacados</h2>
       </header>
 
-      <div class="blog__grid">
-        <!-- TODO: replaced by the WP_Query loop over the `post` post type. -->
-        <article class="post" data-reveal>
-          <div class="post__media">
-            <img src="assets/img/photos/blog-thumb.jpg" alt="" loading="lazy" decoding="async">
-          </div>
-          <div class="post__body">
-            <h3 class="post__title">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</h3>
-            <a class="link-arrow post__link" href="#">
-              Leer artículo
-              <svg class="icon-svg" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
-            </a>
-          </div>
-        </article>
+      <div class="carousel blog__carousel" data-carousel aria-roledescription="carrusel" aria-label="Artículos destacados">
+  <div class="carousel__viewport blog__grid" tabindex="0" aria-label="Artículos destacados">
+          <!-- TODO: replaced by the WP_Query loop over the `post` post type. -->
+          <article class="post" data-reveal>
+            <div class="post__media">
+              <img src="assets/img/photos/blog-thumb.jpg" alt="" loading="lazy" decoding="async">
+            </div>
+            <div class="post__body">
+              <h3 class="post__title">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</h3>
+              <a class="link-arrow post__link" href="#">
+                Leer artículo
+                <svg class="icon-svg" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+              </a>
+            </div>
+          </article>
 
-        <article class="post" data-reveal style="--reveal-delay:100ms">
-          <div class="post__media">
-            <img src="assets/img/photos/blog-thumb.jpg" alt="" loading="lazy" decoding="async">
-          </div>
-          <div class="post__body">
-            <h3 class="post__title">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</h3>
-            <a class="link-arrow post__link" href="#">
-              Leer artículo
-              <svg class="icon-svg" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
-            </a>
-          </div>
-        </article>
+          <article class="post" data-reveal style="--reveal-delay:100ms">
+            <div class="post__media">
+              <img src="assets/img/photos/blog-thumb.jpg" alt="" loading="lazy" decoding="async">
+            </div>
+            <div class="post__body">
+              <h3 class="post__title">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</h3>
+              <a class="link-arrow post__link" href="#">
+                Leer artículo
+                <svg class="icon-svg" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+              </a>
+            </div>
+          </article>
 
-        <article class="post" data-reveal style="--reveal-delay:200ms">
-          <div class="post__media">
-            <img src="assets/img/photos/blog-thumb.jpg" alt="" loading="lazy" decoding="async">
-          </div>
-          <div class="post__body">
-            <h3 class="post__title">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</h3>
-            <a class="link-arrow post__link" href="#">
-              Leer artículo
-              <svg class="icon-svg" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
-            </a>
-          </div>
-        </article>
+          <article class="post" data-reveal style="--reveal-delay:200ms">
+            <div class="post__media">
+              <img src="assets/img/photos/blog-thumb.jpg" alt="" loading="lazy" decoding="async">
+            </div>
+            <div class="post__body">
+              <h3 class="post__title">Lorem ipsum dolor sit amet, consectetuer adipiscing elit</h3>
+              <a class="link-arrow post__link" href="#">
+                Leer artículo
+                <svg class="icon-svg" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+              </a>
+            </div>
+          </article>
+        </div>
+        <div class="carousel__controls">
+          <button class="carousel__btn carousel__btn--prev" type="button" data-carousel-prev aria-label="Anterior">
+            <svg class="icon-svg" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+          </button>
+          <div class="carousel__dots" data-carousel-dots role="tablist" aria-label="Seleccionar elemento"></div>
+          <button class="carousel__btn carousel__btn--next" type="button" data-carousel-next aria-label="Siguiente">
+            <svg class="icon-svg" aria-hidden="true"><use href="#i-arrow-right"></use></svg>
+          </button>
+        </div>
       </div>
     </div>
   </section>

@@ -100,3 +100,20 @@
     padding: 0 var(--sp-2) var(--sp-3);
   }
 }
+
+/* --- Carousel (mobile only) ----------------------------------------------- */
+
+@media (max-width: 767px) {
+  .blog__carousel {
+    --slides: 1.06;
+    --carousel-gap: var(--sp-4);
+    --carousel-bleed-y: var(--sp-4);
+    --carousel-bleed-x: var(--sp-3);
+  }
+
+  /* The single-column cap is for the stacked grid; inside a track the slide
+     width comes from --slides and a max-width here would fight it. */
+  .blog__grid {
+    max-width: none;
+  }
+}

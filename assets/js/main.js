@@ -157,8 +157,15 @@
       return b;
     });
 
+    // The carousel keeps its own idea of which slide is current. Deriving it
+    // from scrollLeft every time stalls autoplay whenever a smooth scroll is
+    // interrupted or has not landed yet; the scroll listener still corrects
+    // this value after a manual swipe.
+    let index = 0;
+
     function scrollToIndex(i) {
       const clamped = Math.max(0, Math.min(items.length - 1, i));
+      index = clamped;
       viewport.scrollTo({
         left: items[clamped].offsetLeft - items[0].offsetLeft,
         behavior: prefersReducedMotion() ? 'auto' : 'smooth'
@@ -211,13 +218,13 @@
     function sync() {
       // 2px of slack absorbs sub-pixel layout rounding.
       const scrollable = viewport.scrollWidth - viewport.clientWidth > 2;
+      const was = root.getAttribute('data-scrollable');
       root.setAttribute('data-scrollable', String(scrollable));
-      if (!scrollable) return;
-      render(currentIndex());
+      if (!scrollable) { stop(); return; }
+      if (was !== 'true') play();
+      index = currentIndex();
+      render(index);
     }
-
-    if (prev) prev.addEventListener('click', function () { scrollToIndex(currentIndex() - 1); });
-    if (next) next.addEventListener('click', function () { scrollToIndex(currentIndex() + 1); });
 
     // Debounced rather than rAF-throttled: this only needs to run once the
     // scroll settles, and a timer cannot get wedged if frames stop being
@@ -233,7 +240,69 @@
     } else {
       window.addEventListener('resize', sync);
     }
+
+    /* -------------------------------------------------------------------
+     * Autoplay.
+     *
+     * Motion that starts on its own has to be escapable, so it stops for
+     * good the moment the reader takes over — a swipe, a dot, or keyboard
+     * focus — and it never starts at all under prefers-reduced-motion.
+     * It also idles while the section is off-screen or the tab is hidden,
+     * so nothing scrolls where nobody is looking.
+     * ---------------------------------------------------------------- */
+    const INTERVAL = 3500;
+    let timer = 0;
+    let surrendered = false;
+    let onScreen = true;
+
+    function play() {
+      stop();
+      if (surrendered || prefersReducedMotion() || document.hidden || !onScreen) return;
+      if (root.getAttribute('data-scrollable') !== 'true') return;
+      timer = setInterval(advance, INTERVAL);
+    }
+
+    function stop() {
+      clearInterval(timer);
+      timer = 0;
+    }
+
+    function advance() {
+      const last = reachableCount() - 1;
+      scrollToIndex(index >= last ? 0 : index + 1);
+    }
+
+    // Any deliberate interaction hands control over permanently.
+    function surrender() {
+      surrendered = true;
+      stop();
+    }
+    if (prev) prev.addEventListener('click', function () { scrollToIndex(index - 1); });
+    if (next) next.addEventListener('click', function () { scrollToIndex(index + 1); });
+
+    viewport.addEventListener('pointerdown', surrender, { passive: true });
+    viewport.addEventListener('keydown', surrender);
+    if (dotsBox) dotsBox.addEventListener('click', surrender);
+    if (prev) prev.addEventListener('click', surrender);
+    if (next) next.addEventListener('click', surrender);
+
+    // Hovering is not a takeover, just a pause.
+    root.addEventListener('pointerenter', stop);
+    root.addEventListener('pointerleave', play);
+    root.addEventListener('focusin', stop);
+    root.addEventListener('focusout', play);
+
+    document.addEventListener('visibilitychange', play);
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        onScreen = entries[0].isIntersecting;
+        play();
+      }, { threshold: 0.25 }).observe(root);
+    }
+
     sync();
+    play();
   }
 
   /* ---------------------------------------------------------------------

@@ -73,18 +73,27 @@
   }
 }
 
-@media (max-width: 479px) {
-  .cta__actions,
+@media (max-width: 767px) {
+  /* On a phone the desktop arrangement reads heavy: a 260px-minimum pill, a
+     detached 56px arrow beside it and a narrower second button — three
+     different widths stacked. The arrow only repeats the button's own action,
+     so it goes, and both buttons share one modest width. */
+  .cta__primary .btn-arrow {
+    display: none;
+  }
+
+  .cta__actions {
+    width: 100%;
+    max-width: 300px;
+  }
+
   .cta__primary {
     width: 100%;
   }
 
   .cta__actions .btn {
+    width: 100%;
     min-width: 0;
-    flex: 1;
-  }
-
-  .cta__primary .btn-arrow {
-    flex: none;
+    padding-inline: var(--sp-5);
   }
 }
