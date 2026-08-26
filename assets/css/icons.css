@@ -45,6 +45,10 @@
 .icon--chart-up    { --icon: url("../img/icons/chart-up.png"); }
 .icon--gear-cycle  { --icon: url("../img/icons/gear-cycle.png"); }
 
+/* Footer — social */
+.icon--linkedin { --icon: url("../img/icons/linkedin.png"); }
+.icon--facebook { --icon: url("../img/icons/facebook.png"); }
+
 /* Footer contact */
 .icon--phone { --icon: url("../img/icons/phone.png"); }
 .icon--mail  { --icon: url("../img/icons/mail.png"); }

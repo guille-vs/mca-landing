@@ -80,7 +80,8 @@
   border: 1.5px solid rgba(255, 255, 255, 0.55);
   border-radius: 50%;
   color: var(--c-on-dark);
-  font-size: 1.5rem;
+  /* ~50% of the 56px circle, matching the mark-to-circle ratio in the PDF. */
+  font-size: 1.75rem;
   transition: background-color var(--dur) var(--ease),
               border-color var(--dur) var(--ease),
               color var(--dur) var(--ease);
