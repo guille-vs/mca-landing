@@ -360,6 +360,166 @@
     return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }
 
+
+  /* ---------------------------------------------------------------------
+   * Meeting-request modal.
+   *
+   * <dialog> supplies the focus trap, Esc and the inert background. This adds
+   * opening, dismissal, Spanish field validation and submission.
+   * ------------------------------------------------------------------ */
+  function initMeetingModal() {
+    const dialog = document.getElementById('modal-reunion');
+    if (!dialog || typeof dialog.showModal !== 'function') return;
+
+    let opener = null;
+
+    document.querySelectorAll('[data-modal-open]').forEach(function (el) {
+      el.addEventListener('click', function (event) {
+        event.preventDefault();
+        opener = el;
+        dialog.showModal();
+        document.documentElement.style.overflow = 'hidden';
+      });
+    });
+
+    // Idempotent, and called from every dismissal path rather than only from
+    // the `close` event, so the page can never be left scroll-locked.
+    function restore() {
+      document.documentElement.style.overflow = '';
+      if (opener) { opener.focus(); opener = null; }
+    }
+
+    function closeDialog() {
+      dialog.close();
+      restore();
+    }
+
+    dialog.querySelectorAll('[data-modal-close]').forEach(function (el) {
+      el.addEventListener('click', closeDialog);
+    });
+
+    // A click that lands on <dialog> itself is a click on the backdrop: the
+    // panel fills the element, so anything else would have hit the panel.
+    dialog.addEventListener('click', function (event) {
+      if (event.target === dialog) closeDialog();
+    });
+
+    dialog.addEventListener('cancel', restore);
+    dialog.addEventListener('close', restore);
+    dialog.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') restore();
+    });
+
+    initMeetingForm(dialog);
+  }
+
+  const FIELD_MESSAGES = {
+    nombre: 'Ingresa tus nombres completos.',
+    correo: 'Ingresa un correo válido.',
+    celular: 'Ingresa un número de celular válido.',
+    empresa: 'Indica el nombre de tu empresa.',
+    mensaje: 'Cuéntanos brevemente tu requerimiento.'
+  };
+
+  function initMeetingForm(scope) {
+    const form = scope.querySelector('[data-meeting-form]');
+    if (!form) return;
+
+    const status = form.querySelector('[data-form-status]');
+    const fields = Array.prototype.slice.call(form.querySelectorAll('.form__input'));
+
+    // Give every error slot an id so its input can point at it; without this a
+    // screen reader announces the field as invalid but never says why.
+    fields.forEach(function (input) {
+      const slot = input.closest('.form__field').querySelector('[data-error]');
+      if (slot) slot.id = 'err-' + input.name;
+    });
+
+    function problemWith(input) {
+      const value = input.value.trim();
+      if (!value) return FIELD_MESSAGES[input.name] || 'Este campo es obligatorio.';
+      if (input.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)) {
+        return FIELD_MESSAGES.correo;
+      }
+      if (input.type === 'tel' && value.replace(/\D/g, '').length < 6) {
+        return FIELD_MESSAGES.celular;
+      }
+      if (input.name === 'mensaje' && value.length < 10) {
+        return 'Describe tu requerimiento con un poco más de detalle.';
+      }
+      return '';
+    }
+
+    function mark(input) {
+      const field = input.closest('.form__field');
+      const slot = field.querySelector('[data-error]');
+      const problem = problemWith(input);
+      if (problem) {
+        field.setAttribute('data-invalid', '');
+        input.setAttribute('aria-invalid', 'true');
+        input.setAttribute('aria-describedby', slot.id);
+        slot.textContent = problem;
+      } else {
+        field.removeAttribute('data-invalid');
+        input.removeAttribute('aria-invalid');
+        input.removeAttribute('aria-describedby');
+        slot.textContent = '';
+      }
+      return !problem;
+    }
+
+    fields.forEach(function (input) {
+      // Do not scold while the reader is still typing: check on blur, then stay
+      // live only for a field that is already flagged.
+      input.addEventListener('blur', function () { mark(input); });
+      input.addEventListener('input', function () {
+        if (input.closest('.form__field').hasAttribute('data-invalid')) mark(input);
+      });
+    });
+
+    function say(state, text) {
+      status.setAttribute('data-state', state);
+      status.textContent = text;
+    }
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const bad = fields.filter(function (input) { return !mark(input); });
+      if (bad.length) {
+        say('error', 'Revisa los campos marcados antes de enviar.');
+        bad[0].focus();
+        return;
+      }
+
+      const endpoint = form.getAttribute('action');
+      if (!endpoint) {
+        // No backend wired yet. Say so plainly rather than show a thank-you
+        // screen for a message that was never sent.
+        say('error', 'El formulario aún no está conectado a un destino. ' +
+                     'Configura el atributo action antes de publicar.');
+        return;
+      }
+
+      say('pending', 'Enviando…');
+      const submit = form.querySelector('button[type="submit"]');
+      if (submit) submit.disabled = true;
+
+      fetch(endpoint, { method: 'POST', body: new FormData(form) })
+        .then(function (response) {
+          if (!response.ok) throw new Error(response.status);
+          form.reset();
+          say('success', '¡Gracias! Un consultor te contactará para coordinar la reunión.');
+        })
+        .catch(function () {
+          say('error', 'No pudimos enviar tu solicitud. Inténtalo de nuevo o escríbenos por WhatsApp.');
+        })
+        .then(function () {
+          if (submit) submit.disabled = false;
+        });
+    });
+  }
+
   function init() {
     initStickyHeader();
     initNavToggle();
@@ -367,6 +527,7 @@
     initScrollSpy();
     initCarousels();
     initCounters();
+    initMeetingModal();
   }
 
   if (document.readyState === 'loading') {
