@@ -27,7 +27,8 @@
   align-items: center;
   /* Top padding clears the pill that overlaps the border. */
   padding: calc(var(--sp-8) + var(--sp-4)) var(--sp-5) var(--sp-7);
-  border: 1px solid var(--c-line);
+  /* Sampled at 6x from the PDF: a clean 1px navy stroke, not a pale hairline. */
+  border: 1px solid var(--c-navy);
   border-radius: var(--r-lg);
 }
 

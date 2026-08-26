@@ -62,7 +62,8 @@
 
 .why__item-title {
   margin-bottom: var(--sp-2);
-  color: var(--c-sky);
+  /* #2C8ABE sampled off the glyphs in the PDF — brand blue, not the pale sky. */
+  color: #2c8abe;
   font-size: var(--fs-h3);
   font-weight: var(--fw-medium);
 }

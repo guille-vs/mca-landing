@@ -117,9 +117,13 @@
   overflow: hidden;
 }
 
+/* The PDF's photo is 1676x804 (2.08:1) on a 1920 canvas, i.e. 87% of the page
+   width. This container is proportionally wider, so holding 2.08 here would
+   render the photo taller than the design. Widening the ratio restores the
+   height the design actually shows. */
 .stats__photo img {
   width: 100%;
-  aspect-ratio: 2.08 / 1;
+  aspect-ratio: 2.24 / 1;
   object-fit: cover;
 }
 

@@ -9,7 +9,10 @@
   position: relative;
   isolation: isolate;
   padding-top: calc(var(--header-h) + clamp(3rem, 6vw, 6.5rem));
-  padding-bottom: clamp(10rem, 17vw, 18rem);
+  /* Raising the hero's own bottom padding is what opens the gap to the stats
+     cards. Reducing the stats pull instead would shorten the overlap and break
+     the invariant that keeps the hero wave below the photo's top edge. */
+  padding-bottom: clamp(12rem, 20vw, 21rem);
   background-color: var(--c-navy);
   color: var(--c-on-dark);
   overflow: hidden;
@@ -36,9 +39,12 @@
 
 /* --- Copy ----------------------------------------------------------------- */
 
+/* The PDF's longest h1 line, "17 años convirtiendo", measures 764px at 77px
+   type = 9.92em. Expressing the cap in em keeps that first line intact at any
+   size; `14ch` was measured against the wrong reference and broke the line. */
 .hero__title {
   color: var(--c-on-dark);
-  max-width: 14ch;
+  max-width: 10.5em;
 }
 
 .hero__text {
@@ -99,7 +105,7 @@
   }
 
   .hero__title {
-    max-width: 18ch;
+    max-width: 13em;
   }
 
   /* Stacked, the laptop would otherwise run the full container width. */

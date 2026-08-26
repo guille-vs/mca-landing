@@ -18,14 +18,16 @@
   padding: var(--sp-4);
   border-radius: var(--r-md);
   background-color: var(--c-white);
-  box-shadow: var(--sh-card);
+  /* The design haloes these cards in the brand blue (#E4EDF9 just outside the
+     edge), not in the neutral card shadow used elsewhere. */
+  box-shadow: var(--sh-glow);
   transition: transform var(--dur) var(--ease),
               box-shadow var(--dur) var(--ease);
 }
 
 .post:hover {
   transform: translateY(-6px);
-  box-shadow: var(--sh-card-hover);
+  box-shadow: 0 12px 34px rgba(46, 128, 180, 0.3);
 }
 
 .post__media {

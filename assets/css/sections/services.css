@@ -19,7 +19,7 @@
   padding: var(--sp-8) clamp(var(--sp-5), 2vw, var(--sp-6)) var(--sp-7);
   border-radius: var(--r-lg);
   background-color: var(--c-white);
-  box-shadow: var(--sh-card);
+  box-shadow: var(--sh-glow-down);
   transition: transform var(--dur) var(--ease),
               box-shadow var(--dur) var(--ease);
 }
@@ -52,7 +52,7 @@
 @media (hover: hover) {
   .service:hover {
     transform: translateY(-6px);
-    background-color: var(--c-navy-soft);
+    background: var(--grad-service);
     box-shadow: var(--sh-card-hover);
   }
 

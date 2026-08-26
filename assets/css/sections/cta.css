@@ -43,22 +43,42 @@
   color: var(--c-on-dark-muted);
 }
 
+/* Both buttons share one width. Measured in the PDF: the filled pill runs
+   x1189..1564 and the WhatsApp outline sits on exactly the same span, with the
+   arrow circle outside it to the right (376px on a 1920 canvas = 19.6vw).
+   `width: max-content` lets the column size itself to whichever label is
+   widest and stretch the other to match, so the two can never disagree — a
+   fixed width kept breaking as the fluid font outgrew it at some viewports. */
 .cta__actions {
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: stretch;
   gap: var(--sp-4);
-}
-
-/* Primary action pairs the pill with a detached circular arrow. */
-.cta__primary {
-  display: flex;
-  align-items: center;
-  gap: var(--sp-3);
+  width: max-content;
+  min-width: clamp(300px, 19.6vw, 376px);
 }
 
 .cta__actions .btn {
-  min-width: 260px;
+  width: 100%;
+  min-width: 0;
+  white-space: nowrap;
+}
+
+/* The arrow hangs outside the column so it never counts towards the width the
+   two buttons agree on. */
+.cta__primary {
+  position: relative;
+}
+
+.cta__primary .btn-arrow {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + var(--sp-3));
+  transform: translateY(-50%);
+}
+
+.cta__primary .btn-arrow:hover {
+  transform: translateY(-50%) translateX(4px);
 }
 
 /* --- Breakpoints ---------------------------------------------------------- */
@@ -84,16 +104,11 @@
 
   .cta__actions {
     width: 100%;
+    min-width: 0;
     max-width: 300px;
   }
 
-  .cta__primary {
-    width: 100%;
-  }
-
   .cta__actions .btn {
-    width: 100%;
-    min-width: 0;
     padding-inline: var(--sp-5);
   }
 }
