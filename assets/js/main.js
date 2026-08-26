@@ -250,7 +250,7 @@
      * It also idles while the section is off-screen or the tab is hidden,
      * so nothing scrolls where nobody is looking.
      * ---------------------------------------------------------------- */
-    const INTERVAL = 3500;
+    const INTERVAL = 3000;
     let timer = 0;
     let surrendered = false;
     let onScreen = true;

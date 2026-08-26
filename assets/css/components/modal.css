@@ -1,0 +1,248 @@
+/* ==========================================================================
+   Modal + form — solicitud de reunión comercial
+
+   Built on native <dialog>, so the browser supplies focus trapping, Esc to
+   close, the inert background and the ::backdrop pseudo-element. There is no
+   design for this screen in the PDF, so it borrows the landing's own language:
+   navy headings, the blue primary pill, sky accents and the card radius.
+   ========================================================================== */
+
+.modal {
+  width: min(640px, calc(100vw - 2 * var(--sp-5)));
+  max-height: min(92vh, 900px);
+  padding: 0;
+  border: 0;
+  border-radius: var(--r-xl);
+  background-color: var(--c-white);
+  color: var(--c-ink-muted);
+  box-shadow: 0 40px 90px -30px rgba(22, 39, 62, 0.55);
+  overflow: hidden;
+}
+
+.modal::backdrop {
+  background-color: rgba(16, 29, 48, 0.72);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* Fallback for a browser without dialog support, or if the script fails:
+   the opener is a plain anchor, so :target still reveals the panel. */
+.modal:target {
+  display: block;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: var(--z-drawer);
+  transform: translate(-50%, -50%);
+}
+
+/* Column layout: only the field list scrolls, so the submit button stays put
+   no matter how short the viewport is. */
+.modal__panel {
+  display: flex;
+  flex-direction: column;
+  max-height: inherit;
+  padding: clamp(var(--sp-5), 3.5vw, var(--sp-7));
+  overflow: hidden;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.form__body {
+  min-height: 0;
+  overflow-y: auto;
+  /* Room for the focus ring, which would otherwise be clipped at the edges. */
+  padding: 4px;
+  margin: -4px -4px var(--sp-5);
+}
+
+/* --- Close ---------------------------------------------------------------- */
+
+.modal__close {
+  position: absolute;
+  top: var(--sp-4);
+  right: var(--sp-4);
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: var(--c-ink);
+  font-size: 1.75rem;
+  line-height: 1;
+  transition: background-color var(--dur) var(--ease);
+}
+
+.modal__close:hover {
+  background-color: var(--c-paper);
+}
+
+/* --- Head ----------------------------------------------------------------- */
+
+.modal__head {
+  flex: none;
+  margin-bottom: var(--sp-5);
+  padding-right: var(--sp-8);
+}
+
+.modal__title {
+  font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem);
+}
+
+.modal__lead {
+  margin-top: var(--sp-3);
+  color: var(--c-ink-muted);
+}
+
+/* --- Form ----------------------------------------------------------------- */
+
+/* Tight enough that the submit button stays above the fold on a laptop; the
+   panel still scrolls if a viewport is shorter than that. */
+.form__row {
+  margin-bottom: var(--sp-4);
+}
+
+.form__row--split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sp-4);
+}
+
+.form__field {
+  display: block;
+}
+
+.form__label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--c-ink);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-semibold);
+}
+
+.form__input {
+  width: 100%;
+  padding: 10px var(--sp-4);
+  border: 1.5px solid var(--c-line);
+  border-radius: var(--r-sm);
+  background-color: var(--c-white);
+  color: var(--c-ink);
+  font-family: inherit;
+  font-size: var(--fs-body);
+  transition: border-color var(--dur) var(--ease),
+              box-shadow var(--dur) var(--ease);
+}
+
+.form__input::placeholder {
+  color: #8a99ab;
+}
+
+.form__input:focus {
+  border-color: var(--c-blue);
+  box-shadow: 0 0 0 3px rgba(46, 128, 180, 0.18);
+  outline: none;
+}
+
+.form__input--area {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* --- Errors --------------------------------------------------------------- */
+/* Announced by the field's own aria-describedby, wired up in main.js. */
+
+.form__error {
+  display: none;
+  margin-top: var(--sp-2);
+  color: #c0392b;
+  font-size: var(--fs-small);
+}
+
+.form__field[data-invalid] .form__error {
+  display: block;
+}
+
+.form__field[data-invalid] .form__input {
+  border-color: #c0392b;
+}
+
+.form__field[data-invalid] .form__input:focus {
+  box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.16);
+}
+
+/* --- Status --------------------------------------------------------------- */
+
+.form__status {
+  display: none;
+  flex: none;
+  margin-bottom: var(--sp-4);
+  padding: var(--sp-4);
+  border-radius: var(--r-sm);
+  font-size: var(--fs-small);
+}
+
+.form__status[data-state="error"],
+.form__status[data-state="pending"],
+.form__status[data-state="success"] {
+  display: block;
+}
+
+.form__status[data-state="error"] {
+  background-color: #fdecea;
+  color: #922b21;
+}
+
+.form__status[data-state="pending"] {
+  background-color: var(--c-paper);
+  color: var(--c-ink-muted);
+}
+
+.form__status[data-state="success"] {
+  background-color: #e8f5ec;
+  color: #1e6b3a;
+}
+
+/* --- Actions -------------------------------------------------------------- */
+
+.form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  flex: none;
+  gap: var(--sp-3);
+}
+
+.form__actions .btn {
+  flex: 1 1 auto;
+  min-width: 160px;
+}
+
+/* --- Breakpoints ---------------------------------------------------------- */
+
+@media (max-width: 560px) {
+  .form__row--split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .form__actions .btn {
+    flex: 1 1 100%;
+  }
+}
+
+/* --- Motion --------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  .modal[open] {
+    animation: modal-in var(--dur) var(--ease);
+  }
+
+  @keyframes modal-in {
+    from {
+      opacity: 0;
+      transform: translateY(12px) scale(0.98);
+    }
+  }
+}
