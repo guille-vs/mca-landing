@@ -114,7 +114,9 @@
    cap here would be measured against 17px and wrap the much larger heading. */
 .section-head {
   max-width: 58rem;
-  margin-bottom: var(--sp-8);
+  /* The PDF leaves 103px between the h2's baseline box and the top of the first
+     card (58px to the badge that hangs above it) on its 1920 canvas = 5.4vw. */
+  margin-bottom: clamp(var(--sp-8), 5.4vw, 6.5rem);
 }
 
 .section-head--wide {

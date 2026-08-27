@@ -32,8 +32,18 @@
   gap: clamp(var(--sp-7), 5vw, var(--sp-10));
 }
 
+/* The PDF's longest line here, "Compártenos tu necesidad y", measures 749.7px
+   at 55px type = 13.63em. `20ch` resolved to less than that (ch is the width of
+   "0", far narrower than this sentence's average character) and broke the line.
+   The column itself was never the constraint — it is 869px at 1920. */
 .cta__title {
-  max-width: 20ch;
+  max-width: 14em;
+  /* `text-wrap: balance` from the global h2 rule evens the line lengths out and
+     pushes the trailing "y" down even though 51px are free on that line. Greedy
+     wrapping reproduces the PDF's break: "Compártenos tu necesidad y" first.
+     Note `wrap`, not `normal` — `normal` is not a valid text-wrap value and the
+     declaration is dropped silently, leaving balance in place. */
+  text-wrap: wrap;
   color: var(--c-on-dark);
 }
 
@@ -89,7 +99,7 @@
   }
 
   .cta__title {
-    max-width: 24ch;
+    max-width: 17em;
   }
 }
 

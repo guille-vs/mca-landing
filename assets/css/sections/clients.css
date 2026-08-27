@@ -12,7 +12,7 @@
 }
 
 .clients__title {
-  max-width: 14ch;
+  max-width: 15ch;
 }
 
 .clients__panels {
@@ -27,8 +27,10 @@
   align-items: center;
   /* Top padding clears the pill that overlaps the border. */
   padding: calc(var(--sp-8) + var(--sp-4)) var(--sp-5) var(--sp-7);
-  /* Sampled at 6x from the PDF: a clean 1px navy stroke, not a pale hairline. */
-  border: 1px solid var(--c-navy);
+  /* The PDF strokes these 1px in navy, but on a fractional pixel boundary, so
+     it renders across two pixels (#677281 + #ADB3BB) and reads softer and
+     thicker than a hard 1px line. 1.5px reproduces that weight. */
+  border: 1.5px solid var(--c-navy);
   border-radius: var(--r-lg);
 }
 
@@ -36,6 +38,9 @@
   /* Lift the pill so it is centred on the panel's top edge. */
   margin-top: calc(-1 * var(--sp-8) - var(--sp-7));
   margin-bottom: var(--sp-6);
+  /* The design draws a white rounded rect 4px larger than the pill behind it,
+     which cuts a gap in the panel border rather than letting the two touch. */
+  box-shadow: 0 0 0 4px var(--c-white);
 }
 
 .client-panel__logos {

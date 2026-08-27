@@ -12,11 +12,18 @@
   --c-navy-soft: #1b3a56;     /* featured "Canales digitales" service card   */
   --c-navy-edge: #1b405f;     /* right end of the "why us" panel gradient    */
 
-  --c-blue: #2e80b4;          /* primary brand blue                          */
-  --c-blue-bright: #499ac7;   /* filled buttons                              */
-  --c-blue-hover: #3f8bb8;    /* filled button hover                         */
+  /* One brand blue, read straight out of the PDF's own colour records: the
+     hero and CTA buttons, the header pill, the sector pill, the step circles
+     and the "Paso 1" / "Leer artículo" / eyebrow text are all #2C8BBF. The
+     earlier #2E80B4 / #499AC7 pair came from raster samples that had landed on
+     antialiased edges. */
+  --c-blue: #2c8bbf;          /* the brand blue, fills and text alike        */
+  --c-blue-bright: #2c8bbf;   /* filled buttons — same value in the design   */
+  --c-blue-hover: #277aa8;    /* filled button hover, 12% darker             */
+  /* #2C8BBF is 3.78:1 on white, short of the 4.5:1 AA needs for 14px text.
+     Only the small uppercase eyebrow uses this darker step. */
+  --c-blue-ink: #287dac;      /* 4.55:1 on white                             */
   --c-blue-deep: #2978a8;     /* methodology step icons                      */
-  --c-blue-ink: #246993;      /* darkest blue used in gradients              */
   --c-blue-cta: #2a85b7;      /* left end of the final CTA gradient          */
 
   --c-sky: #a8c8e1;           /* icon badges, eyebrows, highlighted card     */
@@ -34,7 +41,11 @@
   --c-on-dark-muted: rgba(255, 255, 255, 0.78);
 
   /* --- Gradients -------------------------------------------------------- */
-  --grad-why: linear-gradient(100deg, var(--c-navy) 0%, var(--c-navy-edge) 100%);
+  /* Purely horizontal in the PDF: the panel reads identical at y4150 and y4700
+     and its left edge is #16263E at every height. The 100deg tilt this had made
+     that edge lighten downwards, which pulled it away from the flat bleed
+     behind it and showed as a vertical line — worse on narrow, tall panels. */
+  --grad-why: linear-gradient(90deg, var(--c-navy) 0%, var(--c-navy-edge) 100%);
   --grad-cta: linear-gradient(90deg, var(--c-blue-cta) 0%, var(--c-navy) 100%);
   /* Sampled across the disc at 6x: the spread is HORIZONTAL (delta 75 left to
      right, zero top to bottom), so the earlier 135deg diagonal was wrong. */

@@ -33,7 +33,9 @@
   content: "";
   position: absolute;
   top: 0;
-  right: 100%;
+  /* Overlaps the panel by 1px. At fractional layout positions `right: 100%`
+     can land a hair short and expose the page behind it as a hairline. */
+  right: calc(100% - 1px);
   width: 100vw;
   height: 100%;
   background-color: var(--c-navy);
@@ -52,7 +54,9 @@
 
 .why__item {
   padding-left: clamp(var(--sp-5), 2.5vw, var(--sp-7));
-  border-left: 1px solid rgba(255, 255, 255, 0.22);
+  /* Pure white in the PDF (renders #F1F2F4 on the panel); the previous 22%
+     white came out at #4A5E72 and read as a faint grey. */
+  border-left: 1px solid rgba(255, 255, 255, 0.92);
 }
 
 .why__item:first-child {
@@ -114,7 +118,7 @@
     padding-left: 0;
     padding-top: var(--sp-6);
     border-left: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.22);
+    border-top: 1px solid rgba(255, 255, 255, 0.92);
   }
 
   .why__item:first-child {

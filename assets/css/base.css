@@ -121,7 +121,9 @@ p {
 .eyebrow {
   display: block;
   margin-bottom: var(--sp-3);
-  color: var(--c-blue);
+  /* The design's #2C8BBF is 3.78:1 on white; at 14px that misses AA, so the
+     eyebrow alone steps down to the 4.55:1 shade. */
+  color: var(--c-blue-ink);
   font-size: var(--fs-eyebrow);
   font-weight: var(--fw-semibold);
   letter-spacing: var(--ls-eyebrow);
