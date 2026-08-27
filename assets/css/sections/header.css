@@ -18,6 +18,13 @@
   box-shadow: var(--sh-header);
 }
 
+/* On pages that are NOT the front page (posts, archives, etc.), the header
+   must start solid because there is no dark hero behind it. */
+body:not(.home) .site-header {
+  background-color: var(--c-navy);
+  box-shadow: var(--sh-header);
+}
+
 .site-header__inner {
   display: flex;
   align-items: center;

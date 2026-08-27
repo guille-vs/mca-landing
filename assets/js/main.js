@@ -505,9 +505,26 @@
       const submit = form.querySelector('button[type="submit"]');
       if (submit) submit.disabled = true;
 
-      fetch(endpoint, { method: 'POST', body: new FormData(form) })
+      // Build JSON payload from form fields.
+      var payload = {};
+      fields.forEach(function (input) {
+        payload[input.name] = input.value.trim();
+      });
+
+      fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
         .then(function (response) {
-          if (!response.ok) throw new Error(response.status);
+          return response.json().then(function (data) {
+            if (!response.ok || !data.success) {
+              throw new Error(data.message || response.status);
+            }
+            return data;
+          });
+        })
+        .then(function () {
           form.reset();
           say('success', '¡Gracias! Un consultor te contactará para coordinar la reunión.');
         })

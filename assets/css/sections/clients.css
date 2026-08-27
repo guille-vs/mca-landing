@@ -27,10 +27,10 @@
   align-items: center;
   /* Top padding clears the pill that overlaps the border. */
   padding: calc(var(--sp-8) + var(--sp-4)) var(--sp-5) var(--sp-7);
-  /* The PDF strokes these 1px in navy, but on a fractional pixel boundary, so
-     it renders across two pixels (#677281 + #ADB3BB) and reads softer and
-     thicker than a hard 1px line. 1.5px reproduces that weight. */
-  border: 1.5px solid var(--c-navy);
+  /* 2px of the blended tone, not 1.5px of solid navy: measured at 6x, the
+     design's stroke covers 2 pixels at roughly half coverage each. A hard
+     navy line at any width reads darker and thinner than what the PDF shows. */
+  border: 2px solid var(--c-line-panel);
   border-radius: var(--r-lg);
 }
 
@@ -63,8 +63,8 @@
 }
 
 /* Optical sizing. A single max-height makes wide wordmarks tower over stacked
-   marks, so each logo gets the cap that equalises its perceived weight. The
-   `--cap` fallback covers any logo added later without its own rule. */
+   marks, so each logo carries the cap that equalises its perceived weight,
+   set per client in the admin. The fallback covers an empty field. */
 .client-panel__logos img {
   width: auto;
   max-width: 82%;
@@ -77,28 +77,18 @@
   transform: scale(1.05);
 }
 
-/* The source files are trimmed flush to their artwork, so each cap follows
-   the same rule: cap ≈ 62px / sqrt(aspect ratio). That holds the *area* of
-   every mark roughly constant instead of its height, which is what the eye
-   actually compares. */
-.client-panel__logos img[data-logo="kimberly-clark"] { --cap: 26px; }
-.client-panel__logos img[data-logo="financiera-oh"] { --cap: 26px; }
-.client-panel__logos img[data-logo="mac"] { --cap: 36px; }
-.client-panel__logos img[data-logo="bbva"] { --cap: 34px; }
-.client-panel__logos img[data-logo="fondo-mivivienda"] { --cap: 50px; }
-.client-panel__logos img[data-logo="quimica-suiza"] { --cap: 45px; }
-.client-panel__logos img[data-logo="scotiabank"] { --cap: 58px; }
-.client-panel__logos img[data-logo="diners-club"] { --cap: 60px; }
-.client-panel__logos img[data-logo="gilat"] { --cap: 68px; }
+/* The optical cap now travels inline, written per client in the admin, so a
+   logo added later arrives with its own height instead of inheriting a rule
+   that was never written for it. The fallback above covers an empty field.
 
-/* These two share a row, so they also get a tighter max-width. */
-.client-panel__logos img[data-logo="3m"] {
-  --cap: 45px;
-  max-width: 44%;
-}
+   Sizing guide, kept here because the admin help text points at it: start from
+   62px / sqrt(width / height) — that holds the *area* of every mark roughly
+   constant instead of its height, which is what the eye actually compares —
+   then nudge by hand. The eleven bundled logos ended up 8px off that curve at
+   most, so it is a starting point, not the answer. */
 
-.client-panel__logos img[data-logo="pecsa-gas"] {
-  --cap: 72px;
+/* Two logos sharing a row each get half the width they would take alone. */
+.client-panel__row img {
   max-width: 44%;
 }
 

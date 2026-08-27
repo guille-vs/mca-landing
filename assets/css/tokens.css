@@ -35,6 +35,11 @@
   --c-ink: #16273e;           /* headings on light surfaces                  */
   --c-ink-muted: #44566e;     /* body copy on light surfaces                 */
   --c-line: #e3ecf5;          /* card borders on light surfaces              */
+  /* The PDF strokes the client panels 1px navy, but on a fractional pixel
+     boundary, so it lands as a 2px band of #677281 + #ADB3BB. Their ink
+     coverage (0.652 + 0.352 = 1.004 px of navy) spread evenly over 2px gives
+     this tone: a soft grey-blue, not a hard navy hairline. */
+  --c-line-panel: #8a939e;    /* client panel outline                        */
 
   /* --- Text on dark surfaces -------------------------------------------- */
   --c-on-dark: #ffffff;
