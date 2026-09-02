@@ -40,6 +40,9 @@
     --carousel-gap: var(--sp-4);
     --carousel-bleed-y: var(--sp-3);
     --carousel-bleed-x: var(--sp-3);
+    /* Prevent the viewport's negative margin from creating a page-wide
+       horizontal scroll. */
+    overflow-x: hidden;
   }
 
   /* Two class levels so this beats the section's own `display: grid`
@@ -76,19 +79,19 @@
 
   .carousel .carousel__viewport > * {
     flex: 0 0 var(--slide-w);
-    scroll-snap-align: start;
+    scroll-snap-align: center;
     /* Keeps whatever the item hangs to its left (an overhanging badge) inside
        the scroller once it snaps. Without this the snap crops it. */
     scroll-margin-left: var(--slide-inset, 0px);
   }
 
-  /* Trailing spacer. Showing a peek of the next card means the last items
-     share the final screen, so without this the last one can never be scrolled
-     to the start edge — the arrows run out before reaching it. One slide's
-     worth of empty track at the end makes every item a real stop. */
+  /* Centre the first and last items by injecting equal spacers before and
+     after the track content. The spacers are flex children so they share the
+     same gap, keeping the rhythm consistent. */
+  .carousel .carousel__viewport::before,
   .carousel .carousel__viewport::after {
     content: "";
-    flex: 0 0 calc(100% - var(--slide-w) - var(--carousel-gap));
+    flex: 0 0 calc((100% - var(--slide-w)) / 2 - var(--carousel-bleed-x, 0px));
   }
 
   .carousel[data-scrollable="true"] .carousel__controls {

@@ -124,10 +124,29 @@
 
 @media (max-width: 767px) {
   .services__carousel {
-    --slides: 1.08;
-    --carousel-gap: var(--sp-5);
-    /* Vertical bleed clears the badge that hangs above each card. */
+    --slides: 1.0;
+    --carousel-gap: var(--sp-8);
     --carousel-bleed-y: var(--sp-7);
-    --carousel-bleed-x: var(--sp-3);
+    --carousel-bleed-x: 0;
+  }
+
+  .services__grid {
+    padding: 0 30px;
+  }
+
+  .services__carousel .carousel__viewport {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .service {
+    --badge: min(26cqw, 72px);
+    --badge-ring: 8px;
+    padding: 0 var(--sp-3) var(--sp-4);
+  }
+
+  .service__badge {
+    top: calc(var(--badge) * -0.307);
+    left: calc(var(--badge) * -0.264);
   }
 }

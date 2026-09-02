@@ -80,11 +80,22 @@
     --slides: 1.6;
     --carousel-gap: var(--sp-7);
     --carousel-bleed-y: var(--sp-3);
-    --carousel-bleed-x: var(--sp-3);
+    --carousel-bleed-x: 0;
   }
 
   .method__steps::before {
     display: none;
+  }
+
+  /* Override the generic carousel centering spacer for this section: the method
+     steps need asymmetric spacers so all 5 items are reachable. */
+  .method__carousel .carousel__viewport::before {
+    flex: 0 0 calc((100% - var(--slide-w)) / 2);
+  }
+
+  .method__carousel .carousel__viewport::after {
+    /* Extra trailing space lets step 5 scroll to centre. */
+    flex: 0 0 calc((100% - var(--slide-w)) / 2 + var(--slide-w) * 0.35);
   }
 
   .method__step::after {
