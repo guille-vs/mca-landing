@@ -1,0 +1,114 @@
+/* ==========================================================================
+   Section 08 — Ciclo virtuoso (metodología)
+   Five equal steps joined by a dashed rule that runs between the icon centres.
+   ========================================================================== */
+
+.method__steps {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--sp-4);
+}
+
+/* Connector: with 5 equal columns each icon centre sits at 10%, 30% … 90%. */
+.method__steps::before {
+  content: "";
+  position: absolute;
+  top: 40px;
+  left: 10%;
+  width: 80%;
+  border-top: 2px dashed var(--c-line);
+}
+
+.method__step {
+  position: relative;
+  z-index: var(--z-content);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.method__step .icon-badge {
+  width: 80px;
+  height: 80px;
+  margin-bottom: var(--sp-5);
+  /* Masks the dashed rule so it appears to start at the circle's edge. */
+  box-shadow: 0 0 0 10px var(--c-white);
+  font-size: 2.9rem;
+}
+
+.method__step-no {
+  color: var(--c-blue);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-medium);
+}
+
+.method__step-label {
+  color: var(--c-ink);
+  font-size: var(--fs-lead);
+}
+
+/* --- Breakpoints ---------------------------------------------------------- */
+
+@media (max-width: 899px) {
+  .method__steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--sp-8) var(--sp-5);
+  }
+
+  .method__steps::before {
+    display: none;
+  }
+}
+
+@media (max-width: 479px) {
+  .method__steps {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* --- Carousel (mobile only) ----------------------------------------------- */
+/* The desktop connector is one rule across the whole row, positioned by
+   percentage. That cannot survive a scrolling track, so on mobile each step
+   draws its own segment reaching to the next one and it travels with the item. */
+
+@media (max-width: 767px) {
+  /* Wider steps and a bigger gap: at 2.2 slides the last three shared one
+     screen, so only three of the five were ever reachable with the arrows. */
+  .method__carousel {
+    --slides: 1.6;
+    --carousel-gap: var(--sp-7);
+    --carousel-bleed-y: var(--sp-3);
+    --carousel-bleed-x: 0;
+  }
+
+  .method__steps::before {
+    display: none;
+  }
+
+  /* Override the generic carousel centering spacer for this section: the method
+     steps need asymmetric spacers so all 5 items are reachable. */
+  .method__carousel .carousel__viewport::before {
+    flex: 0 0 calc((100% - var(--slide-w)) / 2);
+  }
+
+  .method__carousel .carousel__viewport::after {
+    /* Extra trailing space lets step 5 scroll to centre. */
+    flex: 0 0 calc((100% - var(--slide-w)) / 2 + var(--slide-w) * 0.35);
+  }
+
+  .method__step::after {
+    content: "";
+    position: absolute;
+    top: 40px;
+    /* From the edge of this badge's white ring to the edge of the next one. */
+    left: calc(50% + 50px);
+    width: calc(100% + var(--carousel-gap) - 100px);
+    border-top: 2px dashed var(--c-line);
+  }
+
+  .method__step:last-child::after {
+    display: none;
+  }
+}

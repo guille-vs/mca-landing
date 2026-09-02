@@ -1,0 +1,129 @@
+/* ==========================================================================
+   Section 06 — Confían en nosotros
+   Headline on the left, three outlined logo panels on the right. Each panel's
+   pill label straddles its top border, as in the PDF.
+   ========================================================================== */
+
+.clients__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.72fr) minmax(0, 2fr);
+  align-items: center;
+  gap: clamp(var(--sp-7), 5vw, var(--sp-10));
+}
+
+.clients__title {
+  max-width: 15ch;
+}
+
+.clients__panels {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(var(--sp-4), 2vw, var(--sp-6));
+}
+
+.client-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Top padding clears the pill that overlaps the border. */
+  padding: calc(var(--sp-8) + var(--sp-4)) var(--sp-5) var(--sp-7);
+  /* 2px of the blended tone, not 1.5px of solid navy: measured at 6x, the
+     design's stroke covers 2 pixels at roughly half coverage each. A hard
+     navy line at any width reads darker and thinner than what the PDF shows. */
+  border: 2px solid var(--c-line-panel);
+  border-radius: var(--r-lg);
+}
+
+.client-panel__label {
+  /* Lift the pill so it is centred on the panel's top edge. */
+  margin-top: calc(-1 * var(--sp-8) - var(--sp-7));
+  margin-bottom: var(--sp-6);
+  /* The design draws a white rounded rect 4px larger than the pill behind it,
+     which cuts a gap in the panel border rather than letting the two touch. */
+  box-shadow: 0 0 0 4px var(--c-white);
+}
+
+.client-panel__logos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(var(--sp-5), 2.4vw, var(--sp-7));
+  width: 100%;
+  height: 100%;
+}
+
+/* "Otros sectores" pairs two logos on its first row. */
+.client-panel__row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(var(--sp-4), 2vw, var(--sp-6));
+  width: 100%;
+}
+
+/* Optical sizing. A single max-height makes wide wordmarks tower over stacked
+   marks, so each logo carries the cap that equalises its perceived weight,
+   set per client in the admin. The fallback covers an empty field. */
+.client-panel__logos img {
+  width: auto;
+  max-width: 82%;
+  max-height: var(--cap, 44px);
+  object-fit: contain;
+  transition: transform var(--dur) var(--ease);
+}
+
+.client-panel__logos img:hover {
+  transform: scale(1.05);
+}
+
+/* The optical cap now travels inline, written per client in the admin, so a
+   logo added later arrives with its own height instead of inheriting a rule
+   that was never written for it. The fallback above covers an empty field.
+
+   Sizing guide, kept here because the admin help text points at it: start from
+   62px / sqrt(width / height) — that holds the *area* of every mark roughly
+   constant instead of its height, which is what the eye actually compares —
+   then nudge by hand. The eleven bundled logos ended up 8px off that curve at
+   most, so it is a starting point, not the answer. */
+
+/* Two logos sharing a row each get half the width they would take alone. */
+.client-panel__row img {
+  max-width: 44%;
+}
+
+/* --- Breakpoints ---------------------------------------------------------- */
+
+@media (max-width: 1023px) {
+  .clients__inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .clients__title {
+    max-width: 20ch;
+  }
+}
+
+@media (max-width: 767px) {
+  .clients__panels {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sp-9);
+  }
+}
+
+/* --- Carousel (mobile only) ----------------------------------------------- */
+/* The pill label is pulled above the panel's top edge, so the vertical bleed
+   has to clear it or the scroll container clips it off. */
+
+@media (max-width: 767px) {
+  .clients__carousel {
+    --slides: 1.0;
+    --carousel-gap: var(--sp-5);
+    --carousel-bleed-y: var(--sp-7);
+    --carousel-bleed-x: 0;
+  }
+
+  .clients__panels {
+    gap: 0;
+  }
+}

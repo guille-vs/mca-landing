@@ -1,0 +1,188 @@
+/* ==========================================================================
+   Carousel — mobile only.
+
+   Above 767px every section keeps the grid the design specifies; this file
+   does nothing. At or below 767px the same markup turns into a swipeable
+   track. Built on native scroll-snap rather than a library: swipe, trackpad,
+   keyboard and screen-reader scrolling all come for free, and there is no
+   build step to add.
+
+   Per-instance knobs, set in the section stylesheet:
+     --slides          items visible at once (fractional shows a peek of the
+                       next one, which is what tells the user it scrolls)
+     --carousel-gap    space between items
+     --carousel-bleed-y  vertical padding so overhanging badges, pills and
+                         card shadows survive the scroll container's clipping
+     --carousel-bleed-x  horizontal equivalent. Keep it at or below the
+                         container's own padding or the track overflows the
+                         page and a horizontal scrollbar appears.
+     --slide-inset     horizontal margin an item carries of its own, which has
+                       to come out of the width budget
+   ========================================================================== */
+
+.carousel {
+  position: relative;
+}
+
+/* Chrome is hidden by default and only appears on mobile, and only once JS has
+   confirmed the track actually overflows. */
+.carousel__controls {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-5);
+  margin-top: var(--sp-6);
+}
+
+@media (max-width: 767px) {
+  .carousel {
+    --slides: 1;
+    --carousel-gap: var(--sp-4);
+    --carousel-bleed-y: var(--sp-3);
+    --carousel-bleed-x: var(--sp-3);
+    /* Prevent the viewport's negative margin from creating a page-wide
+       horizontal scroll. */
+    overflow-x: hidden;
+  }
+
+  /* Two class levels so this beats the section's own `display: grid`
+     regardless of stylesheet order. */
+  .carousel .carousel__viewport {
+    display: flex;
+    gap: var(--carousel-gap);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    overscroll-behavior-x: contain;
+    /* overflow-x also clips vertically, so pad for shadows and overhanging
+       badges, then cancel it with an equal negative margin. */
+    padding: var(--carousel-bleed-y) var(--carousel-bleed-x);
+    margin: calc(-1 * var(--carousel-bleed-y)) calc(-1 * var(--carousel-bleed-x));
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .carousel .carousel__viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  .carousel {
+    --slide-w: calc(
+      (
+        100%
+        - var(--slides) * var(--slide-inset, 0px)
+        - (var(--slides) - 1) * var(--carousel-gap)
+      ) / var(--slides)
+    );
+  }
+
+  .carousel .carousel__viewport > * {
+    flex: 0 0 var(--slide-w);
+    scroll-snap-align: center;
+    /* Keeps whatever the item hangs to its left (an overhanging badge) inside
+       the scroller once it snaps. Without this the snap crops it. */
+    scroll-margin-left: var(--slide-inset, 0px);
+  }
+
+  /* Centre the first and last items by injecting equal spacers before and
+     after the track content. The spacers are flex children so they share the
+     same gap, keeping the rhythm consistent. */
+  .carousel .carousel__viewport::before,
+  .carousel .carousel__viewport::after {
+    content: "";
+    flex: 0 0 calc((100% - var(--slide-w)) / 2 - var(--carousel-bleed-x, 0px));
+  }
+
+  .carousel[data-scrollable="true"] .carousel__controls {
+    display: flex;
+  }
+}
+
+/* --- Arrows --------------------------------------------------------------- */
+
+.carousel__btn {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1.5px solid var(--c-blue);
+  border-radius: 50%;
+  color: var(--c-blue);
+  font-size: 1.25rem;
+  transition: background-color var(--dur) var(--ease),
+              color var(--dur) var(--ease),
+              opacity var(--dur) var(--ease);
+}
+
+.carousel__btn:hover:not(:disabled) {
+  background-color: var(--c-blue);
+  color: var(--c-white);
+}
+
+.carousel__btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* One arrow glyph, mirrored for the other direction. */
+.carousel__btn--prev .icon-svg {
+  transform: scaleX(-1);
+}
+
+/* --- Dots ----------------------------------------------------------------- */
+/* One dot per item, not per page: the tracks use fractional slide widths, so
+   items — not pages — are what the scroll actually snaps to. */
+
+.carousel__dots {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.carousel__dot {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border-radius: var(--r-pill);
+  background-color: var(--c-line);
+  transition: width var(--dur) var(--ease),
+              background-color var(--dur) var(--ease);
+}
+
+.carousel__dot[aria-current="true"] {
+  width: 26px;
+  background-color: var(--c-blue);
+}
+
+.carousel__dot:hover {
+  background-color: var(--c-blue-bright);
+}
+
+/* --- On dark surfaces ----------------------------------------------------- */
+
+.carousel--on-dark .carousel__btn {
+  border-color: var(--c-sky);
+  color: var(--c-sky);
+}
+
+.carousel--on-dark .carousel__btn:hover:not(:disabled) {
+  background-color: var(--c-sky);
+  color: var(--c-navy);
+}
+
+.carousel--on-dark .carousel__dot {
+  background-color: rgba(255, 255, 255, 0.28);
+}
+
+.carousel--on-dark .carousel__dot[aria-current="true"] {
+  background-color: var(--c-sky);
+}
+
+/* --- Motion --------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel .carousel__viewport {
+    scroll-behavior: auto;
+  }
+}

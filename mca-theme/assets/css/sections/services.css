@@ -1,0 +1,152 @@
+/* ==========================================================================
+   Section 05 — Soluciones de gestión y servicio
+   3 x 2 grid. Each card carries a circular icon badge that deliberately hangs
+   off its top-left corner; the last card is inverted as the featured one.
+   ========================================================================== */
+
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  /* Measured off the PDF's vectors: cards 479.9 wide with 85.9px between them
+     on a 1611px grid = 5.33%. A percentage gap resolves against the grid's own
+     width, so it holds at any container size. Row gap there is 70.3px. */
+  column-gap: max(var(--sp-5), 5.33%);
+  row-gap: clamp(var(--sp-7), 3.7vw, 72px);
+}
+
+/* Every badge dimension is a share of the card's own width, taken from the
+   PDF's vectors: card 479.9 wide, badge 145.4 across (30.3%), hanging 38.4px
+   left (8.0% of the card) and 44.7px above (9.3%), with a 6px white ring
+   (1.25% of the card). `container-type` makes cqw mean "1% of this card", so
+   the whole cluster scales together instead of drifting apart.
+
+   The cqw unit measures the CONTENT box, and this card is padded, so every
+   figure below is the design's share divided by ~0.86 (the content-to-border
+   ratio across the range this card is ever rendered at). */
+.service {
+  /* Declared here so the badge AND the title's clearance share one value; the
+     cqw resolves where it is used, in the descendants, not on this element. */
+  --badge: min(35.2cqw, 100px);
+
+  /* ---- Separación entre el badge y la card: edita este valor ----
+     Es el grosor del aro blanco que rodea el círculo. El PDF usa 4.1px sobre
+     un badge de 100; subirlo despega más el badge de la card. El título se
+     recalcula solo, así que no hay nada más que tocar. */
+  --badge-ring: 8px;
+
+  position: relative;
+  container-type: inline-size;
+  padding: 0 clamp(var(--sp-5), 2vw, var(--sp-6)) var(--sp-7);
+  border-radius: var(--r-lg);
+  background-color: var(--c-white);
+  box-shadow: var(--sh-glow-down);
+  transition: transform var(--dur) var(--ease),
+              box-shadow var(--dur) var(--ease);
+}
+
+.service__badge {
+  /* Every figure is a ratio of the badge itself, straight off the PDF:
+     overhang 38.4/145.4 left, 44.7/145.4 up, ring 6/145.4, glyph 0.52. */
+  position: absolute;
+  top: calc(var(--badge) * -0.307);
+  left: calc(var(--badge) * -0.264);
+  width: var(--badge);
+  height: var(--badge);
+  /* The ring is what visually seats the badge on the card corner instead of
+     letting it float beside it. */
+  box-shadow: 0 0 0 var(--badge-ring) var(--c-white);
+  font-size: calc(var(--badge) * 0.52);
+  transition: background-color var(--dur) var(--ease);
+}
+
+/* The badge reaches 24.4cqw into the card (35.2 tall, less the 10.8 it hangs
+   above), so the title has to start past that. It lives here rather than as
+   padding on the card because an element cannot query ITSELF: cqw inside
+   `.service` would resolve against the viewport, not the card. */
+.service__title {
+  /* Clears the badge: it reaches (1 - 0.307) of its own height into the card,
+     and the ring extends past that, so both terms count. */
+  margin-top: calc(var(--badge) * 0.78 + var(--badge-ring));
+  margin-bottom: var(--sp-3);
+  color: var(--c-ink);
+  font-weight: var(--fw-medium);
+  transition: color var(--dur) var(--ease);
+}
+
+.service__text {
+  color: var(--c-ink-muted);
+  line-height: 1.55;
+  transition: color var(--dur) var(--ease);
+}
+
+/* --- Hover ---------------------------------------------------------------- */
+/* The PDF marks one card as permanently dark. Here that inverted treatment is
+   the hover state of every card instead, so no single service looks pre-picked.
+   Behind `hover: hover` so touch devices never latch into the dark state. */
+
+@media (hover: hover) {
+  .service:hover {
+    transform: translateY(-6px);
+    background: var(--grad-service);
+    box-shadow: var(--sh-card-hover);
+  }
+
+  .service:hover .service__title {
+    color: var(--c-on-dark);
+  }
+
+  .service:hover .service__text {
+    color: var(--c-on-dark-muted);
+  }
+
+  .service:hover .service__badge {
+    background-color: var(--c-navy);
+  }
+}
+
+/* --- Breakpoints ---------------------------------------------------------- */
+
+@media (max-width: 1023px) {
+  .services__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 639px) {
+  .services__grid {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--sp-9);
+  }
+
+}
+
+/* --- Carousel (mobile only) ----------------------------------------------- */
+
+@media (max-width: 767px) {
+  .services__carousel {
+    --slides: 1.0;
+    --carousel-gap: var(--sp-8);
+    --carousel-bleed-y: var(--sp-7);
+    --carousel-bleed-x: 0;
+  }
+
+  .services__grid {
+    padding: 0 30px;
+  }
+
+  .services__carousel .carousel__viewport {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .service {
+    --badge: min(26cqw, 72px);
+    --badge-ring: 8px;
+    padding: 0 var(--sp-3) var(--sp-4);
+  }
+
+  .service__badge {
+    top: calc(var(--badge) * -0.307);
+    left: calc(var(--badge) * -0.264);
+  }
+}

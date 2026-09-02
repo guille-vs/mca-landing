@@ -1,0 +1,45 @@
+/* ==========================================================================
+   Section 04 — Quiénes somos
+   Two columns: eyebrow + headline on the left, running copy on the right.
+   ========================================================================== */
+
+.about {
+  padding-top: clamp(var(--sp-9), 9vw, var(--sp-11));
+}
+
+.about__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(var(--sp-6), 5vw, var(--sp-10));
+  align-items: start;
+}
+
+.about__title {
+  max-width: 18ch;
+}
+
+.about__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+  /* The right column sits optically level with the headline's first line. */
+  padding-top: var(--sp-2);
+}
+
+.about__body p {
+  font-size: var(--fs-lead);
+}
+
+@media (max-width: 899px) {
+  .about__inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .about__title {
+    max-width: 22ch;
+  }
+
+  .about__body {
+    padding-top: 0;
+  }
+}

@@ -1,0 +1,20 @@
+/*
+Theme Name: Master Center Américas
+Theme URI: https://mastercenteramericas.com
+Author: Globals
+Description: Tema a medida para Master Center Américas — landing de una página con secciones modulares, carruseles en móvil y formulario de solicitud de reunión. Construido sobre el diseño MCA-WEB.
+Version: 1.0.0
+Requires at least: 6.0
+Tested up to: 6.7
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: mca
+Tags: one-page, custom-colors, custom-logo, custom-menu, translation-ready
+*/
+
+/*
+ * The real styles live in assets/css/, enqueued in dependency order from
+ * functions.php. This file only carries the theme header that WordPress
+ * requires, plus anything that has to override the section stylesheets.
+ */

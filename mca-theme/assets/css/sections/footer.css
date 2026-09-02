@@ -1,0 +1,120 @@
+/* ==========================================================================
+   Section 11 — Site footer
+   Four bands across the top row (brand, blurb, contact, social) and a thin
+   legal line underneath.
+   ========================================================================== */
+
+.site-footer {
+  padding-top: clamp(var(--sp-8), 5vw, var(--sp-10));
+  padding-bottom: var(--sp-6);
+  background-color: var(--c-navy);
+  color: var(--c-on-dark);
+}
+
+.site-footer__top {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(0, 1fr)
+    minmax(0, 0.9fr)
+    auto;
+  align-items: start;
+  gap: clamp(var(--sp-6), 4vw, var(--sp-9));
+}
+
+.site-footer__logo img {
+  width: auto;
+  height: 52px;
+}
+
+.site-footer__blurb {
+  color: var(--c-on-dark-muted);
+  line-height: 1.7;
+}
+
+/* --- Contact -------------------------------------------------------------- */
+
+.site-footer__heading {
+  margin-bottom: var(--sp-4);
+  color: var(--c-on-dark);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-medium);
+}
+
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.contact-list a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-4);
+  color: var(--c-on-dark);
+  transition: color var(--dur) var(--ease);
+}
+
+.contact-list a:hover {
+  color: var(--c-sky);
+}
+
+.contact-list .icon {
+  font-size: 1.375rem;
+  color: var(--c-sky);
+}
+
+/* --- Social --------------------------------------------------------------- */
+
+.social {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.social a {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  color: var(--c-on-dark);
+  /* ~50% of the 56px circle, matching the mark-to-circle ratio in the PDF. */
+  font-size: 1.75rem;
+  transition: background-color var(--dur) var(--ease),
+              border-color var(--dur) var(--ease),
+              color var(--dur) var(--ease);
+}
+
+.social a:hover {
+  border-color: var(--c-blue-bright);
+  background-color: var(--c-blue-bright);
+  color: var(--c-white);
+}
+
+/* --- Legal ---------------------------------------------------------------- */
+
+.site-footer__legal {
+  margin-top: clamp(var(--sp-8), 5vw, var(--sp-10));
+  color: rgba(255, 255, 255, 0.55);
+  font-size: var(--fs-small);
+}
+
+/* --- Breakpoints ---------------------------------------------------------- */
+
+@media (max-width: 1023px) {
+  .site-footer__top {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .social {
+    flex-direction: row;
+  }
+}
+
+@media (max-width: 599px) {
+  .site-footer__top {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
